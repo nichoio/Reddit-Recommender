@@ -13,7 +13,7 @@ Download and install [Putty] (https://www.chiark.greenend.org.uk/~sgtatham/putty
 
 ## Connect to the VM
 1. Open Putty
-2. Fill in the details according to the following pictures:
+2. Fill in the details according to the following pictures:  
 ![PuTTY 1](/examples/images/Putty1.PNG)  
 ![PuTTY 2](/examples/images/Putty2.PNG)  
 3. Click on open and use the standard VM password in the following prompt.
