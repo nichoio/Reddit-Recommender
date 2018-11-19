@@ -13,9 +13,9 @@ Download and install [Putty] (https://www.chiark.greenend.org.uk/~sgtatham/putty
 
 ## Connect to the VM
 1. Open Putty
-2. Fill in the details according to the following pictures:
-![PuTTY 1](/Images/HowTos/Putty1.PNG)
-![PuTTY 2](/Images/HowTos/Putty2.PNG)
+2. Fill in the details according to the following pictures:  
+![PuTTY 1](/examples/images/Putty1.PNG)  
+![PuTTY 2](/examples/images/Putty2.PNG)  
 3. Click on open and use the standard VM password in the following prompt.
 
 Thats it, you're connected with the VM.
@@ -24,6 +24,3 @@ Thats it, you're connected with the VM.
 1. nano /home/di-g3_adm/.ssh/authorized_keys
 2. add a new line to the file and copy the content of your public key into the file
 3. Save the file. Next time you will connect to the VM, you can use your private password.
-
-
-
