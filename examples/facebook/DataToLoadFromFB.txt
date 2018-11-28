@@ -1,0 +1,22 @@
+##Data to load from Facebook
+
+#Personal Data
+ID, Username, Birthday, Location, Education
+
+#Events
+ID, Name, Date, (Description), RSVP-Status
+
+#(Photos)
+(Description)
+
+#Pages
+Name, AboutCategory, (Interaction/Number of stuff user liked on that page), LikeCount, (Number of Friends that like that page too), Tags, Location
+
+#Places
+Name, AboutCategory, (Interaction/Number of stuff user liked on that page), LikeCount, (Number of Friends that like that page too), Tags, Location
+
+#Groups
+Name
+
+#Apps
+(Maybe checking if certain Apps are installed? Tinder--> /r/tinder
