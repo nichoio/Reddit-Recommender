@@ -1,5 +1,5 @@
 our-mysql:
-    image: mysql
+    image: reddit-rec
     command: mysqld --default-authentication-plugin=mysql_native_password
     ports:
         - 3306:3306
