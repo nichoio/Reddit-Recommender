@@ -23,4 +23,4 @@ as_json = [json.loads(str(d)) for d in data]
 
 # write to file as JSON
 with open(JSON_PATH, 'w') as file:
-    json.dump(as_json, file)
+    json.dump(as_json, file, ensure_ascii=False)
