@@ -2,7 +2,7 @@ import facebook
 import json
 
 
-graph = facebook.GraphAPI(access_token='EAAFB8eOiQXsBAAOuhpNZBgYgfNBMwyqaKBfqWFa76cD9yCvN0JZAgZAAV44ol3O1mUt03DUFPJkIwn545vb4yoUpPwh8dKAZBxPwpADeYc0LpgcwQk3FE6hlBIIFN4mRj3e7NTk88huQsoG1MidmZBJ4P0qgqOkthRkBhmqOCXhFzZB261jHZAJTT0logxt9iwZD', version='3.1')
+graph = facebook.GraphAPI(access_token='access_token', version='3.1')
 
 #personal information
 personal = graph.get_object(id='me', fields='id,name,address,hometown,age_range,gender')
