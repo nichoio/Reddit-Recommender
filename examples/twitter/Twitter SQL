@@ -1,0 +1,17 @@
+CREATE TABLE tweets(
+	screen_name varchar(255) NOT NULL,
+	text varchar(300),
+	hashtags varchar(255),
+	id bigint NOT NULL,
+	retweet_count int,
+	favorite_count int,
+	created_at varchar(255),
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE hashtags(
+    internalId int NOT NULL AUTO_INCREMENT,
+    hashtag varchar(255),
+    screen_name varchar(255) NOT NULL,
+    Primary Key (internalId)
+);
