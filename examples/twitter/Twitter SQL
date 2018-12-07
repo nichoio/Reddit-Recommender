@@ -1,17 +1,31 @@
+CREATE TABLE users(
+    screen_name varchar(255),
+    followers_count int,
+    description varchar(255),
+    friends_count int,
+    name varchar(255),
+    PRIMARY KEY(screen_name)
+);
 CREATE TABLE tweets(
 	screen_name varchar(255) NOT NULL,
 	text varchar(300),
-	hashtags varchar(255),
 	id bigint NOT NULL,
 	retweet_count int,
 	favorite_count int,
 	created_at varchar(255),
-	PRIMARY KEY (id)
+	PRIMARY KEY (id),
+    FOREIGN KEY (screen_name) REFERENCES users(screen_name)
 );
-
 CREATE TABLE hashtags(
-    internalId int NOT NULL AUTO_INCREMENT,
-    hashtag varchar(255),
-    screen_name varchar(255) NOT NULL,
-    Primary Key (internalId)
+    hashtag varchar(255) NOT NULL,
+    tweetId bigint NOT NULL,
+    PRIMARY KEY(hashtag, tweetId),
+    FOREIGN KEY (tweetId) REFERENCES tweets(id)
+);
+CREATE TABLE friends(
+	screen_name varchar(255),
+    followed_user varchar(255),
+    PRIMARY KEY(screen_name, followed_user),
+    FOREIGN KEY (followed_user) REFERENCES users(screen_name),
+    FOREIGN KEY(screen_name) REFERENCES users(screen_name)
 );
