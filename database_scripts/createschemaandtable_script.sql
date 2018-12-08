@@ -20,6 +20,7 @@ CREATE TABLE reddit_recommender.user(
 #Creating the Personal Table   
 DROP TABLE IF EXISTS reddit_recommender.personal;
 CREATE TABLE reddit_recommender.personal(
+	id INT KEY AUTO_INCREMENT,
     u_id BIGINT, 
     name VARCHAR(50),
     age_range VARCHAR(10),
@@ -28,6 +29,7 @@ CREATE TABLE reddit_recommender.personal(
 #Creating the Likes Table       
 DROP TABLE IF EXISTS reddit_recommender.likes;
 CREATE TABLE reddit_recommender.likes(
+	id INT KEY AUTO_INCREMENT,
     u_id BIGINT,
     name VARCHAR(50),
     category VARCHAR(50),
@@ -37,6 +39,7 @@ CREATE TABLE reddit_recommender.likes(
 #Creating the Posts Table       
 DROP TABLE IF EXISTS reddit_recommender.posts;
 CREATE TABLE reddit_recommender.posts(
+	id INT KEY AUTO_INCREMENT,
 	u_id BIGINT,
     message LONGTEXT, 
     place VARCHAR(50));
@@ -44,6 +47,7 @@ CREATE TABLE reddit_recommender.posts(
 #Creating the Events Table       
 DROP TABLE IF EXISTS reddit_recommender.events;
 CREATE TABLE reddit_recommender.events(
+	id INT KEY AUTO_INCREMENT,
 	u_id BIGINT, 
     name VARCHAR(50),
     place TINYTEXT,
@@ -55,6 +59,7 @@ CREATE TABLE reddit_recommender.events(
 #Creating the Groups Table    
 DROP TABLE IF EXISTS reddit_recommender.groups;
 CREATE TABLE reddit_recommender.groups(
+	id INT KEY AUTO_INCREMENT,
 	u_id BIGINT, 
-    name VARCHAR(50),
+    name VARCHAR(100),
     description LONGTEXT);
