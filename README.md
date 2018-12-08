@@ -24,3 +24,7 @@ Thats it, you're connected with the VM.
 1. nano /home/di-g3_adm/.ssh/authorized_keys
 2. add a new line to the file and copy the content of your public key into the file
 3. Save the file. Next time you will connect to the VM, you can use your private password.
+
+
+## Link for Entity-Relationship Diagram
+https://www.lucidchart.com/documents/embeddedchart/e0d3267f-238d-449c-911e-460a0c31edcf
