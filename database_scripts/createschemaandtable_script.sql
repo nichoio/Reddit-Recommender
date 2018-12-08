@@ -2,6 +2,18 @@
 CREATE SCHEMA IF NOT EXISTS reddit_recommender; 
 
 #######################
+#		GENERAL		  #
+#######################
+DROP TABLE IF EXISTS reddit_recommender.user;
+CREATE TABLE reddit_recommender.user(
+	user_id INT KEY AUTO_INCREMENT, 
+    name VARCHAR(50), 
+    facebook_u_id VARCHAR(50), 
+    twitter_u_id VARCHAR(50), 
+    reddit_u_id VARCHAR(50));
+    
+
+#######################
 #FACEBOOK DATA RELATED#
 #######################
 
