@@ -20,10 +20,9 @@ CREATE TABLE reddit_recommender.user(
 #Creating the Personal Table   
 DROP TABLE IF EXISTS reddit_recommender.personal;
 CREATE TABLE reddit_recommender.personal(
-	id INT KEY AUTO_INCREMENT,
     u_id BIGINT, 
     name VARCHAR(50),
-    age_range VARCHAR(10),
+    birthday VARCHAR(10),
     gender VARCHAR(10));
 
 #Creating the Likes Table       
