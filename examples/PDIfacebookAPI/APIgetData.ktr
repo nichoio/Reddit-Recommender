@@ -702,7 +702,7 @@
     <ignoreMissingPath>Y</ignoreMissingPath>
     <rownum_field />
     <file>
-      <name>C:\Users\Dominik\DaIn - Recommender System\examples\facebook\likes.json</name>
+      <name>likes.json</name>
       <filemask />
       <exclude_filemask />
       <file_required>N</file_required>
@@ -809,7 +809,7 @@
     <ignoreMissingPath>Y</ignoreMissingPath>
     <rownum_field />
     <file>
-      <name>C:\Users\Dominik\DaIn - Recommender System\examples\facebook\personal.json</name>
+      <name>personal.json</name>
       <filemask />
       <exclude_filemask />
       <file_required>N</file_required>
@@ -916,7 +916,7 @@
     <ignoreMissingPath>Y</ignoreMissingPath>
     <rownum_field />
     <file>
-      <name>C:\Users\Dominik\DaIn - Recommender System\examples\facebook\posts.json</name>
+      <name>posts.json</name>
       <filemask />
       <exclude_filemask />
       <file_required>N</file_required>
@@ -1272,7 +1272,7 @@
     <ignoreMissingPath>Y</ignoreMissingPath>
     <rownum_field />
     <file>
-      <name>C:\Users\Dominik\DaIn - Recommender System\examples\facebook\groups.json</name>
+      <name>groups.json</name>
       <filemask />
       <exclude_filemask />
       <file_required>N</file_required>
@@ -1353,7 +1353,7 @@
     <ignoreMissingPath>Y</ignoreMissingPath>
     <rownum_field />
     <file>
-      <name>C:\Users\Dominik\DaIn - Recommender System\examples\facebook\events.json</name>
+      <name>events.json</name>
       <filemask />
       <exclude_filemask />
       <file_required>N</file_required>

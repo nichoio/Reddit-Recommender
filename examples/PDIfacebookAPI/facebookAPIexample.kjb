@@ -304,8 +304,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>208</xloc>
-      <yloc>288</yloc>
+      <xloc>48</xloc>
+      <yloc>64</yloc>
     </entry>
     <entry>
       <name>FacebookGetData</name>
@@ -340,8 +340,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>384</xloc>
-      <yloc>288</yloc>
+      <xloc>448</xloc>
+      <yloc>64</yloc>
     </entry>
     <entry>
       <name>Success</name>
@@ -350,8 +350,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>560</xloc>
-      <yloc>288</yloc>
+      <xloc>656</xloc>
+      <yloc>64</yloc>
     </entry>
     <entry>
       <name>startfacebookpythonscript.sh</name>
@@ -367,14 +367,15 @@
       <logext />
       <add_date>N</add_date>
       <add_time>N</add_time>
-      <insertScript>N</insertScript>
-      <script />
+      <insertScript>Y</insertScript>
+      <script>#!/bin/sh
+python C:/Users/Dominik/"DaIn - Recommender System"/examples/PDIfacebookAPI/facebook_api.py</script>
       <loglevel>Basic</loglevel>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>304</xloc>
-      <yloc>432</yloc>
+      <xloc>192</xloc>
+      <yloc>64</yloc>
     </entry>
   </entries>
   <hops>
