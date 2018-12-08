@@ -5,7 +5,7 @@ import facebook
 import json
 
 #Graph instantiation
-graph = facebook.GraphAPI(access_token='EAACzsAEgPn0BAAVSfBTKt1LvMvjiRnLsVL94AXyG4SiSoZAAQ15KV51hFzpkHy1hbOxoihZBM2yPzcHioBYlXUcyUKgd1ZBbKgkIj6reZBXZBBQBM9hgvZALVha7ZANy2IigQqs6tEqfvZAguCnOcYcOA7azDTFb5KOzCDpfSCZAs1KasAiExTxaXRqkpBWBS9cwZD', version='3.1')
+graph = facebook.GraphAPI(access_token='access_token', version='3.1')
 
 ####################
 #	  API-Calls	   #
