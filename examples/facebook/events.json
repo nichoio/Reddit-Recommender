@@ -1,0 +1,46 @@
+{
+   "data": [
+      {
+         "name": "13. jobmesse münsterland",
+         "description": "Samstag, 18.05.2019, 10 - 16 Uhr\nSonntag, 19.05.2019, 11 - 17 Uhr\n\nEintritt 3,00 €, ermäßigt 2,00 € für Schüler, Azubis, Studenten, Rentner, Erwerbslose & Transferleistungsbezieher – mit entsprechendem Nachweis, Menschen mit Behinderung (ausgewiesene Begleitperson erhält freien Eintritt). Eintritt frei für Kinder bis 14 Jahren.\n\nEine Recruiting-Veranstaltung zum Thema Job und Karriere für alle Generationen und alle Qualifikationen - das ist die jobmesse deutschland tour!\n\nAusbildung ## Studium ## Praktika ## Trainee ## Berufseinstieg ## Jobwechsel ## Weiterbildung ## Wiedereinstieg ## 50plus ## Existenzgründung\n\nAlle Infos unter http://www.jobmessen.de/muensterland",
+         "place": {
+            "name": "Messe und Congress Centrum Halle Münsterland",
+            "location": {
+               "city": "Münster",
+               "country": "Germany",
+               "latitude": 51.948037308244,
+               "longitude": 7.6378500052734,
+               "street": "Albersloher Weg 32",
+               "zip": "48155"
+            },
+            "id": "250234009101"
+         },
+         "id": "1941362149489389",
+         "rsvp_status": "attending"
+      },
+      {
+         "name": "Candle Light",
+         "description": "Der Adventsgottesdienst für Münsters Studierende\n\nKurz vor den Weihnachtsferien feiern wir einen adventlichen Gottesdienst bei Kerzenschein!",
+         "place": {
+            "name": "St.-Paulus-Dom",
+            "location": {
+               "city": "Münster",
+               "country": "Germany",
+               "latitude": 51.962284729626,
+               "longitude": 7.6258845894821,
+               "street": "Domplatz 28",
+               "zip": "48143"
+            },
+            "id": "455536834546793"
+         },
+         "id": "298980350695754",
+         "rsvp_status": "attending"
+      }
+   ],
+   "paging": {
+      "cursors": {
+         "before": "QVFIUlgwY0otdjlyeXpZAT1JpeXJzaEhtRTE0Y1k1ZA21rZAXZAKSzlVblR0NWROZAHo3V19iR1A0SVpKNmRsZAU4zcGlFbTRhMmpRWTJ3clZAlckxpbER3M1l6X1BB",
+         "after": "QVFIUlZADeHJETUxnMzBRbUduY1RWN2NVSV85RXpTV1pHSUdGMGJMZAFJFWlJjMmpzMnFkMmhhVjRNVVU0Ry01WlQ0RDY5Mm5iaFYyd05oeDVKaFRTZAlNSMTB3"
+      }
+   }
+}

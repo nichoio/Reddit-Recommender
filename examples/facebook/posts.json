@@ -1,0 +1,133 @@
+{
+   "data": [
+      {
+         "id": "2069728436426027_1774376272627913"
+      },
+      {
+         "message": "Hallo alle, \nich bin auf der Suche nach einer netten Bleibe in M\u00fcnster. Falls ihr jemanden kennt, der jemanden kennt ... der ein WG-Zimmer frei hat, w\u00fcrde ich mich \u00fcber eine Privatnachricht freuen! :)",
+         "id": "2069728436426027_1641381335927408"
+      },
+      {
+         "id": "2069728436426027_1425224140876463"
+      },
+      {
+         "id": "2069728436426027_1425223534209857"
+      },
+      {
+         "id": "2069728436426027_1356221321110079"
+      },
+      {
+         "id": "2069728436426027_1046061338792747"
+      },
+      {
+         "id": "2069728436426027_907859832612899"
+      },
+      {
+         "id": "2069728436426027_826706710728212"
+      },
+      {
+         "id": "2069728436426027_760360134029537"
+      },
+      {
+         "id": "2069728436426027_760357467363137"
+      },
+      {
+         "id": "2069728436426027_614109471987938"
+      },
+      {
+         "id": "2069728436426027_583760541689498"
+      },
+      {
+         "message": "Hat wer eine Ps3 zu verleihen oder zu verkaufen?",
+         "id": "2069728436426027_558908007508085"
+      },
+      {
+         "message": "<3!",
+         "place": {
+            "id": "113746281972409",
+            "name": "L\u00fcbeck",
+            "location": {
+               "city": "L\u00fcbeck",
+               "country": "Germany",
+               "latitude": 53.869722222222,
+               "longitude": 10.686388888889,
+               "zip": "23501\u221223570"
+            }
+         },
+         "id": "2069728436426027_544445108954375"
+      },
+      {
+         "message": "Besser sp\u00e4t als nie!",
+         "place": {
+            "id": "200808929948426",
+            "name": "Davidwache",
+            "location": {
+               "city": "M\u00fcnster",
+               "country": "Germany",
+               "latitude": 51.9665,
+               "longitude": 7.61838,
+               "street": "M\u00fcnzstra\u00dfe 49",
+               "zip": "48143"
+            }
+         },
+         "id": "2069728436426027_543526959046190"
+      },
+      {
+         "id": "2069728436426027_519296631469223"
+      },
+      {
+         "id": "2069728436426027_518902191508667"
+      },
+      {
+         "id": "2069728436426027_512979388767614"
+      },
+      {
+         "message": "Sonne genie\u00dfen! :-)",
+         "place": {
+            "id": "397412626979379",
+            "name": "Haltern am See!",
+            "location": {
+               "latitude": 51.74307678081,
+               "longitude": 7.1871259918856
+            }
+         },
+         "id": "2069728436426027_503910083007878"
+      },
+      {
+         "id": "2069728436426027_400071630058391"
+      },
+      {
+         "id": "2069728436426027_389759977756223"
+      },
+      {
+         "id": "2069728436426027_389750761090478"
+      },
+      {
+         "message": "Yeahooo!",
+         "place": {
+            "id": "172682859543687",
+            "name": "Cuba Nova M\u00fcnster",
+            "location": {
+               "city": "M\u00fcnster",
+               "country": "Germany",
+               "latitude": 51.95763,
+               "longitude": 7.63313,
+               "street": "Achtermannstr. 10-12",
+               "zip": "48143"
+            }
+         },
+         "id": "2069728436426027_386676618064559"
+      },
+      {
+         "id": "2069728436426027_379700228762198"
+      },
+      {
+         "message": "Sonne, \u00fcber 30 Grad und Meer. Bestes Leben.",
+         "id": "2069728436426027_362182720513949"
+      }
+   ],
+   "paging": {
+      "previous": "https://graph.facebook.com/v3.2/2069728436426027/posts?fields=message,place,message_tags&since=1523126590&access_token=EAACzsAEgPn0BAMz9kH7qPkwHN1bXbjYwClW81ThZBh7WLZCMik9tZCuOmZCZB6chv3RGSboxPbTMNAmSN4JLgH842WDsJP1THMy7L9ZBRxgZCT4GK0ZBMr9tkzkxL6bOZCTy0SGb0V7WZCrmtRq9wGBRa8wEcNv9wzoIr5o58F4s0eajYBKxhHhz17E7okvCnzc8sZD&limit=25&__paging_token=enc_AdAmTft7oMFqCZCZBIlmxJfwBKjxueNmQ0EGSqm8PZA8p2sT8QCZBuGsiJPFLpOCD7ZARO2wjMiZBN2G7ybQ9MSesCj15DjI9hcZAv4yLIGJs1QZBdONEAZDZD&__previous=1",
+      "next": "https://graph.facebook.com/v3.2/2069728436426027/posts?fields=message,place,message_tags&access_token=EAACzsAEgPn0BAMz9kH7qPkwHN1bXbjYwClW81ThZBh7WLZCMik9tZCuOmZCZB6chv3RGSboxPbTMNAmSN4JLgH842WDsJP1THMy7L9ZBRxgZCT4GK0ZBMr9tkzkxL6bOZCTy0SGb0V7WZCrmtRq9wGBRa8wEcNv9wzoIr5o58F4s0eajYBKxhHhz17E7okvCnzc8sZD&limit=25&until=1340099265&__paging_token=enc_AdCp4nDYNKHIPZCQl8YUCgfCWO5uLYZA99bKxbxt6F2GXRHxdCKhbTZCSjv9q1ZABlHSZC0b7SgjayhF4OHMoGsdoMbOLDZAOm45bJKiOxnsFTidSvbQZDZD"
+   }
+}
