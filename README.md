@@ -26,5 +26,5 @@ Thats it, you're connected with the VM.
 3. Save the file. Next time you will connect to the VM, you can use your private password.
 
 
-## Link for Entity-Relationship Diagram
-https://www.lucidchart.com/documents/embeddedchart/e0d3267f-238d-449c-911e-460a0c31edcf
+## Link for shared folder with DATA SOURCE SCHEMA
+https://www.lucidchart.com/invitations/accept/82069548-16a4-4286-b7d8-6d05c3e2dca2
