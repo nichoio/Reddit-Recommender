@@ -1,46 +1,23 @@
-###################
-#	  IMPORTS	  #
-################### 
 import facebook
 import json
 
-#Graph instantiation
+
+def fetch_and_write(fname, fields):
+    data = graph.get_connections(id='me', connection_name=fname, fields=fields)
+    with open('{}.json'.format(fname), 'w', encoding='utf-8') as outfile:
+        json.dump(data, outfile, ensure_ascii=False, indent=4)
+
+
+# Graph instantiation
 graph = facebook.GraphAPI(access_token='access_token', version='3.1')
 
-####################
-#	  API-Calls	   #
-####################
-#personal information
+
+# personal information - different request structure, hence use custom code
 personal = graph.get_object(id='me', fields='id,name,birthday,gender')
+with open('personal.json', 'w', encoding='utf-8') as outfile:
+    json.dump(personal, outfile, ensure_ascii=False, indent=4)
 
-#writing personal data into json-File
-with open('personal.json', 'w', encoding='utf-8') as outfile: 
-	json.dump(personal, outfile, ensure_ascii=False, indent=3)
-
-#likes
-likes = graph.get_connections(id='me', connection_name='likes', fields='name,category,about,genre')
-	
-#writing like data into json-File
-with open('likes.json', 'w', encoding='utf-8') as outfile: 
-	json.dump(likes, outfile, ensure_ascii=False, indent=3)
-	
-#posts
-posts = graph.get_connections(id='me', connection_name='posts', fields='message,place,message_tags')
-
-#writing post data into json-File	
-with open('posts.json', 'w', encoding='utf-8') as outfile: 
-	json.dump(posts, outfile, ensure_ascii=False, indent=3)	
-
-#events
-events = graph.get_connections(id='me', connection_name='events', fields='name,description,place,rsvp_status')
-
-#writing event data into json-File
-with open('events.json', 'w', encoding='utf-8') as outfile: 
-	json.dump(events, outfile, ensure_ascii=False, indent=3)
-
-#groups
-groups = graph.get_connections(id='me', connection_name='groups', fields='name,description')
-
-#writing group data into json-File 
-with open('groups.json', 'w', encoding='utf-8') as outfile: 
-	json.dump(groups, outfile, ensure_ascii=False, indent=3)
+fetch_and_write('likes', 'name,category,about,genre')
+fetch_and_write('posts', 'message,place,message_tags')
+fetch_and_write('events', 'name,description,place,rsvp_status')
+fetch_and_write('groups', 'name,description')
