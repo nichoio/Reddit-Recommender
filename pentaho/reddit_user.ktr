@@ -520,7 +520,7 @@
     <defaultPathLeafToNull>Y</defaultPathLeafToNull>
     <rownum_field/>
     <file>
-      <name>${Internal.Transformation.Filename.Directory}/../api_scripts/reddit_user.json</name>
+      <name>${Internal.Transformation.Filename.Directory}/reddit_user.json</name>
       <filemask/>
       <exclude_filemask/>
       <file_required>N</file_required>
