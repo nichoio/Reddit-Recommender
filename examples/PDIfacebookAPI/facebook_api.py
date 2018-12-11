@@ -3,7 +3,10 @@ import json
 
 
 def fetch_and_write(type_, fields):
-    '''fetch drom Facebook and API and write selected fields to new JSON file'''
+    ''' Fetch entities of choosen type (events, groups...)
+        connected to current user from Facebook API.
+        Write selected fields to new JSON file
+    '''
     data = graph.get_connections(id='me', connection_name=type_, fields=fields)
     with open('{}.json'.format(type_), 'w', encoding='utf-8') as outfile:
         json.dump(data, outfile, ensure_ascii=False, indent=4)
