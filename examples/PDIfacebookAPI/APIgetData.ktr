@@ -1723,15 +1723,19 @@
     <fields>
       <field>
         <name>name</name>
+        <rename />
       </field>
       <field>
         <name>category</name>
+        <rename />
       </field>
       <field>
         <name>about</name>
+        <rename />
       </field>
       <field>
         <name>genre</name>
+        <rename />
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -1835,8 +1839,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>192</xloc>
-      <yloc>160</yloc>
+      <xloc>176</xloc>
+      <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
