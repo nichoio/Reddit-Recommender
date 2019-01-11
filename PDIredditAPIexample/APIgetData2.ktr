@@ -573,14 +573,14 @@
     </partitioning>
     <connection>reddit</connection>
     <commit>100</commit>
-    <update_bypassed>Y</update_bypassed>
+    <update_bypassed>N</update_bypassed>
     <lookup>
-      <schema />
+      <schema>reddit_recommender</schema>
       <table>subreddits</table>
       <key>
-        <name>id</name>
-        <field>id</field>
-        <condition>LIKE</condition>
+        <name>display_name</name>
+        <field>display_name</field>
+        <condition>=</condition>
         <name2 />
       </key>
       <value>
