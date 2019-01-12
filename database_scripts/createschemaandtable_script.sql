@@ -2,7 +2,7 @@
 CREATE SCHEMA IF NOT EXISTS reddit_recommender; 
 
 #######################
-#		GENERAL		  #
+#	       GENERAL#
 #######################
 DROP TABLE IF EXISTS reddit_recommender.user;
 CREATE TABLE reddit_recommender.user( 
@@ -12,6 +12,19 @@ CREATE TABLE reddit_recommender.user(
     reddit_u_id VARCHAR(50),
     PRIMARY KEY(facebook_u_id));
     
+#######################
+#REDDIT DATA RELATED#
+#######################
+DROP TABLE IF EXISTS reddit_recommender.subreddits;
+CREATE TABLE reddit_recommender.subreddits( 
+    id VARCHAR(50), 
+    title VARCHAR(400), 
+    display_name VARCHAR(400), 
+    subscribers INT,
+    language VARCHAR(100),
+    advertiser_category VARCHAR(200),
+    public_description VARCHAR(1000),
+    PRIMARY KEY(display_name));
 
 #######################
 #FACEBOOK DATA RELATED#
