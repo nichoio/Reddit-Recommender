@@ -24,8 +24,17 @@ CREATE TABLE reddit_recommender.subreddits(
     language VARCHAR(100),
     advertiser_category VARCHAR(200),
     public_description VARCHAR(1000),
-    PRIMARY KEY(display_name));
+    PRIMARY KEY(display_name))
+;
 
+CREATE TABLE reddit_recommender.reddit_personal(
+    user_name VARCHAR(100), 
+    display_name TEXT REFERENCES VARCHAR(400),
+    subscribed boolean TINYINT(1),
+    comments boolean TINYINT(1),
+    PRIMARY KEY (user_name, display_name),
+    FOREIGN KEY(display_name) REFERENCES reddit_recommender.subreddits(display_name) ON DELETE CASCADE)
+;
 #######################
 #FACEBOOK DATA RELATED#
 #######################
