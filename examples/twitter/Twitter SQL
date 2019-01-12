@@ -1,12 +1,4 @@
-CREATE TABLE users(
-    screen_name varchar(255),
-    followers_count int,
-    description varchar(255),
-    friends_count int,
-    name varchar(255),
-    PRIMARY KEY(screen_name)
-);
-CREATE TABLE tweets(
+CREATE TABLE reddit_recommender.twitter_tweets(
 	screen_name varchar(255) NOT NULL,
 	text varchar(300),
 	id bigint NOT NULL,
@@ -14,18 +6,20 @@ CREATE TABLE tweets(
 	favorite_count int,
 	created_at varchar(255),
 	PRIMARY KEY (id),
-    FOREIGN KEY (screen_name) REFERENCES users(screen_name)
+    FOREIGN KEY (screen_name) REFERENCES reddit_recommender.user(twitter_screen_name)
 );
-CREATE TABLE hashtags(
+
+CREATE TABLE reddit_recommender.twitter_hashtags(
     hashtag varchar(255) NOT NULL,
     tweetId bigint NOT NULL,
     PRIMARY KEY(hashtag, tweetId),
-    FOREIGN KEY (tweetId) REFERENCES tweets(id)
+    FOREIGN KEY (tweetId) REFERENCES reddic_recommender.twitter_tweets(id)
 );
-CREATE TABLE friends(
-	screen_name varchar(255),
+
+CREATE TABLE reddit_recommender.twitter_friends(
+    screen_name varchar(255),
     followed_user varchar(255),
     PRIMARY KEY(screen_name, followed_user),
-    FOREIGN KEY (followed_user) REFERENCES users(screen_name),
-    FOREIGN KEY(screen_name) REFERENCES users(screen_name)
+    FOREIGN KEY (followed_user) REFERENCES reddit_recommender.users(screen_name),
+    FOREIGN KEY(screen_name) REFERENCES reddit_recommender.user(screen_name)
 );

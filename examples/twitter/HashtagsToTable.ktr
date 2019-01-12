@@ -591,8 +591,8 @@
       <schema_name />
     </partitioning>
     <connection>DockerMySql</connection>
-    <schema />
-    <table>hashtags</table>
+    <schema>reddit_recommender</schema>
+    <table>twitter_hashtags</table>
     <commit>10</commit>
     <truncate>N</truncate>
     <ignore_errors>Y</ignore_errors>

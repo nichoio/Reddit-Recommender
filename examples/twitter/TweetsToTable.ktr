@@ -644,8 +644,8 @@
       <schema_name />
     </partitioning>
     <connection>DockerMySql</connection>
-    <schema />
-    <table>tweets</table>
+    <schema>reddit_recommender</schema>
+    <table>twitter_tweets</table>
     <commit>10</commit>
     <truncate>N</truncate>
     <ignore_errors>Y</ignore_errors>
