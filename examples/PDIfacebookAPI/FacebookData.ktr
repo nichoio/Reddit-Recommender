@@ -503,11 +503,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Likes output Mapping</from>
-      <to>Likes table output</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Select like values</from>
       <to>Join Rows likes and id</to>
       <enabled>Y</enabled>
@@ -518,11 +513,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Join Rows likes and id</from>
-      <to>Likes output Mapping</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Select post values</from>
       <to>Join Rows posts and id</to>
       <enabled>Y</enabled>
@@ -530,16 +520,6 @@
     <hop>
       <from>Select id value</from>
       <to>Join Rows posts and id</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Join Rows posts and id</from>
-      <to>Posts output Mapping</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Posts output Mapping</from>
-      <to>Posts table output </to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -558,16 +538,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Join Rows event and id</from>
-      <to>Event table output Mapping</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Event table output Mapping</from>
-      <to>Event table output</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Group JSON Input</from>
       <to>Select group values</to>
       <enabled>Y</enabled>
@@ -583,23 +553,28 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Join Rows group and id</from>
-      <to>Group table output Mapping</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Group table output Mapping</from>
-      <to>Group table output</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Personal JSON Input</from>
       <to>Select id value</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Personal JSON Input</from>
-      <to>Table output</to>
+      <from>Join Rows group and id</from>
+      <to>Group table output</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Join Rows likes and id</from>
+      <to>Likes table output</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Join Rows event and id</from>
+      <to>Event table output</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Join Rows posts and id</from>
+      <to>Posts table output </to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -632,6 +607,19 @@
       <include_subfolders>N</include_subfolders>
     </file>
     <fields>
+      <field>
+        <name>id</name>
+        <path>$.data.*.id</path>
+        <type>None</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
       <field>
         <name>name </name>
         <path>$.data.*.name</path>
@@ -749,12 +737,12 @@
     </partitioning>
     <connection>Localhost connection</connection>
     <schema />
-    <table>events</table>
+    <table>facebook_events</table>
     <commit>1000</commit>
     <truncate>N</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>N</specify_fields>
+    <ignore_errors>Y</ignore_errors>
+    <use_batch>N</use_batch>
+    <specify_fields>Y</specify_fields>
     <partitioning_enabled>N</partitioning_enabled>
     <partitioning_field />
     <partitioning_daily>N</partitioning_daily>
@@ -765,6 +753,38 @@
     <return_keys>N</return_keys>
     <return_field />
     <fields>
+      <field>
+        <column_name>e_id</column_name>
+        <stream_name>id</stream_name>
+      </field>
+      <field>
+        <column_name>place</column_name>
+        <stream_name>place</stream_name>
+      </field>
+      <field>
+        <column_name>city</column_name>
+        <stream_name>city</stream_name>
+      </field>
+      <field>
+        <column_name>zip</column_name>
+        <stream_name>zip</stream_name>
+      </field>
+      <field>
+        <column_name>rsvp_status</column_name>
+        <stream_name>rsvp_status</stream_name>
+      </field>
+      <field>
+        <column_name>name</column_name>
+        <stream_name>name </stream_name>
+      </field>
+      <field>
+        <column_name>country</column_name>
+        <stream_name>country </stream_name>
+      </field>
+      <field>
+        <column_name>facebook_u_id</column_name>
+        <stream_name>u_id</stream_name>
+      </field>
     </fields>
     <cluster_schema />
     <remotesteps>
@@ -775,61 +795,6 @@
     </remotesteps>
     <GUI>
       <xloc>1376</xloc>
-      <yloc>480</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Event table output Mapping</name>
-    <type>SelectValues</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <name>name </name>
-        <rename>name</rename>
-      </field>
-      <field>
-        <name>place</name>
-        <rename>place</rename>
-      </field>
-      <field>
-        <name>city</name>
-        <rename>city</rename>
-      </field>
-      <field>
-        <name>zip</name>
-        <rename>zip</rename>
-      </field>
-      <field>
-        <name>country </name>
-        <rename>country</rename>
-      </field>
-      <field>
-        <name>rsvp_status</name>
-        <rename>rsvp_status</rename>
-      </field>
-      <field>
-        <name>u_id</name>
-        <rename>u_id</rename>
-      </field>
-      <select_unspecified>N</select_unspecified>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1200</xloc>
       <yloc>480</yloc>
       <draw>Y</draw>
     </GUI>
@@ -863,6 +828,19 @@
       <include_subfolders>N</include_subfolders>
     </file>
     <fields>
+      <field>
+        <name>id</name>
+        <path>$.data.*.id</path>
+        <type>Integer</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
       <field>
         <name>name</name>
         <path>$.data.*.name</path>
@@ -928,12 +906,12 @@
     </partitioning>
     <connection>Localhost connection</connection>
     <schema />
-    <table>groups</table>
+    <table>facebook_groups</table>
     <commit>1000</commit>
     <truncate>N</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>N</specify_fields>
+    <ignore_errors>Y</ignore_errors>
+    <use_batch>N</use_batch>
+    <specify_fields>Y</specify_fields>
     <partitioning_enabled>N</partitioning_enabled>
     <partitioning_field />
     <partitioning_daily>N</partitioning_daily>
@@ -944,6 +922,22 @@
     <return_keys>N</return_keys>
     <return_field />
     <fields>
+      <field>
+        <column_name>g_id</column_name>
+        <stream_name>id</stream_name>
+      </field>
+      <field>
+        <column_name>name</column_name>
+        <stream_name>name</stream_name>
+      </field>
+      <field>
+        <column_name>description</column_name>
+        <stream_name>description</stream_name>
+      </field>
+      <field>
+        <column_name>facebook_u_id</column_name>
+        <stream_name>u_id</stream_name>
+      </field>
     </fields>
     <cluster_schema />
     <remotesteps>
@@ -954,45 +948,6 @@
     </remotesteps>
     <GUI>
       <xloc>1376</xloc>
-      <yloc>176</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Group table output Mapping</name>
-    <type>SelectValues</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <name>name</name>
-        <rename>name</rename>
-      </field>
-      <field>
-        <name>description</name>
-        <rename>description</rename>
-      </field>
-      <field>
-        <name>u_id</name>
-        <rename>u_id</rename>
-      </field>
-      <select_unspecified>N</select_unspecified>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1200</xloc>
       <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1171,6 +1126,19 @@
     </file>
     <fields>
       <field>
+        <name>id</name>
+        <path>$.data.*.id</path>
+        <type>Integer</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
         <name>name</name>
         <path>$.data.*.name</path>
         <type>String</type>
@@ -1249,48 +1217,6 @@
     </GUI>
   </step>
   <step>
-    <name>Likes output Mapping</name>
-    <type>SelectValues</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <name>u_id</name>
-      </field>
-      <field>
-        <name>name</name>
-      </field>
-      <field>
-        <name>category</name>
-      </field>
-      <field>
-        <name>about</name>
-      </field>
-      <field>
-        <name>genre</name>
-      </field>
-      <select_unspecified>N</select_unspecified>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>816</xloc>
-      <yloc>48</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>Likes table output</name>
     <type>TableOutput</type>
     <description />
@@ -1303,12 +1229,12 @@
     </partitioning>
     <connection>Localhost connection</connection>
     <schema />
-    <table>likes</table>
+    <table>facebook_likes</table>
     <commit>1000</commit>
     <truncate>N</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>N</specify_fields>
+    <ignore_errors>Y</ignore_errors>
+    <use_batch>N</use_batch>
+    <specify_fields>Y</specify_fields>
     <partitioning_enabled>N</partitioning_enabled>
     <partitioning_field />
     <partitioning_daily>N</partitioning_daily>
@@ -1319,6 +1245,30 @@
     <return_keys>N</return_keys>
     <return_field />
     <fields>
+      <field>
+        <column_name>name</column_name>
+        <stream_name>name</stream_name>
+      </field>
+      <field>
+        <column_name>category</column_name>
+        <stream_name>category</stream_name>
+      </field>
+      <field>
+        <column_name>about</column_name>
+        <stream_name>about</stream_name>
+      </field>
+      <field>
+        <column_name>genre</column_name>
+        <stream_name>genre</stream_name>
+      </field>
+      <field>
+        <column_name>facebook_u_id</column_name>
+        <stream_name>u_id</stream_name>
+      </field>
+      <field>
+        <column_name>l_id</column_name>
+        <stream_name>id</stream_name>
+      </field>
     </fields>
     <cluster_schema />
     <remotesteps>
@@ -1470,6 +1420,19 @@
     </file>
     <fields>
       <field>
+        <name>id</name>
+        <path>$.data.*.id</path>
+        <type>String</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
         <name>message</name>
         <path>$.data.*.message</path>
         <type>String</type>
@@ -1522,42 +1485,6 @@
     </GUI>
   </step>
   <step>
-    <name>Posts output Mapping</name>
-    <type>SelectValues</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <name>message</name>
-      </field>
-      <field>
-        <name>place</name>
-      </field>
-      <field>
-        <name>u_id</name>
-      </field>
-      <select_unspecified>N</select_unspecified>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>832</xloc>
-      <yloc>640</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>Posts table output </name>
     <type>TableOutput</type>
     <description />
@@ -1570,12 +1497,12 @@
     </partitioning>
     <connection>Localhost connection</connection>
     <schema />
-    <table>posts</table>
+    <table>facebook_posts</table>
     <commit>1000</commit>
     <truncate>N</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>N</specify_fields>
+    <ignore_errors>Y</ignore_errors>
+    <use_batch>N</use_batch>
+    <specify_fields>Y</specify_fields>
     <partitioning_enabled>N</partitioning_enabled>
     <partitioning_field />
     <partitioning_daily>N</partitioning_daily>
@@ -1586,6 +1513,22 @@
     <return_keys>N</return_keys>
     <return_field />
     <fields>
+      <field>
+        <column_name>p_id</column_name>
+        <stream_name>id</stream_name>
+      </field>
+      <field>
+        <column_name>message</column_name>
+        <stream_name>message</stream_name>
+      </field>
+      <field>
+        <column_name>place</column_name>
+        <stream_name>place</stream_name>
+      </field>
+      <field>
+        <column_name>facebook_u_id</column_name>
+        <stream_name>u_id</stream_name>
+      </field>
     </fields>
     <cluster_schema />
     <remotesteps>
@@ -1613,22 +1556,32 @@
     </partitioning>
     <fields>
       <field>
+        <name>id</name>
+        <rename />
+      </field>
+      <field>
         <name>name </name>
+        <rename />
       </field>
       <field>
         <name>place</name>
+        <rename />
       </field>
       <field>
         <name>city</name>
+        <rename />
       </field>
       <field>
         <name>zip</name>
+        <rename />
       </field>
       <field>
         <name>country </name>
+        <rename />
       </field>
       <field>
         <name>rsvp_status</name>
+        <rename />
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -1658,10 +1611,16 @@
     </partitioning>
     <fields>
       <field>
+        <name>id</name>
+        <rename />
+      </field>
+      <field>
         <name>name</name>
+        <rename />
       </field>
       <field>
         <name>description</name>
+        <rename />
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -1722,6 +1681,10 @@
     </partitioning>
     <fields>
       <field>
+        <name>id</name>
+        <rename />
+      </field>
+      <field>
         <name>name</name>
         <rename />
       </field>
@@ -1765,10 +1728,16 @@
     </partitioning>
     <fields>
       <field>
+        <name>id</name>
+        <rename />
+      </field>
+      <field>
         <name>message</name>
+        <rename />
       </field>
       <field>
         <name>place</name>
+        <rename />
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -1782,65 +1751,6 @@
     <GUI>
       <xloc>384</xloc>
       <yloc>640</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Table output</name>
-    <type>TableOutput</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>Localhost connection</connection>
-    <schema />
-    <table>personal</table>
-    <commit>1000</commit>
-    <truncate>N</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>Y</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field />
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field />
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field />
-    <fields>
-      <field>
-        <column_name>u_id</column_name>
-        <stream_name>id</stream_name>
-      </field>
-      <field>
-        <column_name>name</column_name>
-        <stream_name>name</stream_name>
-      </field>
-      <field>
-        <column_name>birthday</column_name>
-        <stream_name>birthday</stream_name>
-      </field>
-      <field>
-        <column_name>gender</column_name>
-        <stream_name>gender</stream_name>
-      </field>
-    </fields>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>176</xloc>
-      <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

@@ -1,11 +1,11 @@
 import nltk, re
-from sherlock_holmes import bohemia_ch1, bohemia_ch2, bohemia_ch3, boscombe_ch1, boscombe_ch2, boscombe_ch3
+#from sherlock_holmes import bohemia_ch1, bohemia_ch2, bohemia_ch3, boscombe_ch1, boscombe_ch2, boscombe_ch3
 from preprocessing import preprocess_text
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from sklearn.decomposition import LatentDirichletAllocation
 
 # preparing the text
-corpus = [bohemia_ch1, bohemia_ch2, bohemia_ch3, boscombe_ch1, boscombe_ch2, boscombe_ch3]
+corpus = ["Hallo alle, ich bin auf der Suche nach einer netten Bleibe in Münster. Falls ihr jemanden kennt, der jemanden kennt ... der ein WG-Zimmer frei hat, würde ich mich über eine Privatnachricht freuen! :)"]
 preprocessed_corpus = [preprocess_text(chapter) for chapter in corpus]
 
 # Update stop_list:
