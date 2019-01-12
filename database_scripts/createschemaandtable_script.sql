@@ -35,10 +35,10 @@ CREATE TABLE reddit_recommender.reddit_personal(
     PRIMARY KEY (user_name, display_name),
     FOREIGN KEY(display_name) REFERENCES reddit_recommender.subreddits(display_name) ON DELETE CASCADE)
 ;
+
 #######################
 #FACEBOOK DATA RELATED#
 #######################
-
 #Creating the Personal Table  
 #!NOT NEEDED ANYMORE AS WE DECIDED TO MERGE THE USER TABLES!
 #DROP TABLE IF EXISTS reddit_recommender.facebook_personal;
@@ -93,3 +93,35 @@ CREATE TABLE reddit_recommender.facebook_groups(
     description LONGTEXT,
     PRIMARY KEY(g_id,facebook_u_id),
     FOREIGN KEY(facebook_u_id) REFERENCES user(facebook_u_id) ON DELETE CASCADE);
+
+#######################
+#TWITTER DATA RELATED #
+#######################
+DROP TABLE IF EXISTS reddit_recommender.twitter_tweets;
+CREATE TABLE reddit_recommender.twitter_tweets(
+	screen_name varchar(255) NOT NULL,
+	text varchar(300),
+	id bigint NOT NULL,
+	retweet_count int,
+	favorite_count int,
+	created_at varchar(255),
+	PRIMARY KEY (id),
+    FOREIGN KEY (screen_name) REFERENCES reddit_recommender.user(twitter_screen_name)
+);
+
+DROP TABLE IF EXISTS reddit_recommender.twitter_hashtags;
+CREATE TABLE reddit_recommender.twitter_hashtags(
+    hashtag varchar(255) NOT NULL,
+    tweetId bigint NOT NULL,
+    PRIMARY KEY(hashtag, tweetId),
+    FOREIGN KEY (tweetId) REFERENCES reddic_recommender.twitter_tweets(id)
+);
+
+DROP TABLE IF EXISTS reddit_recommender.twitter_friends;
+CREATE TABLE reddit_recommender.twitter_friends(
+    screen_name varchar(255),
+    followed_user varchar(255),
+    PRIMARY KEY(screen_name, followed_user),
+    FOREIGN KEY (followed_user) REFERENCES reddit_recommender.users(screen_name),
+    FOREIGN KEY(screen_name) REFERENCES reddit_recommender.user(screen_name)
+);
