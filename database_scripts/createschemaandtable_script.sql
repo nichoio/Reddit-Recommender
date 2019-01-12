@@ -42,7 +42,7 @@ CREATE TABLE reddit_recommender.subreddits(
 #Creating the Likes Table       
 DROP TABLE IF EXISTS reddit_recommender.facebook_likes;
 CREATE TABLE reddit_recommender.facebook_likes(
-	l_id INT AUTO_INCREMENT,
+	l_id VARCHAR(50),
     facebook_u_id VARCHAR(50),
     name VARCHAR(50),
     category VARCHAR(50),
@@ -54,7 +54,7 @@ CREATE TABLE reddit_recommender.facebook_likes(
 #Creating the Posts Table       
 DROP TABLE IF EXISTS reddit_recommender.facebook_posts;
 CREATE TABLE reddit_recommender.facebook_posts(
-	p_id INT AUTO_INCREMENT,
+	p_id VARCHAR(50),
 	facebook_u_id VARCHAR(50),
     message LONGTEXT, 
     place VARCHAR(50),
@@ -64,9 +64,9 @@ CREATE TABLE reddit_recommender.facebook_posts(
 #Creating the Events Table       
 DROP TABLE IF EXISTS reddit_recommender.facebook_events;
 CREATE TABLE reddit_recommender.facebook_events(
-	e_id INT AUTO_INCREMENT,
+	e_id VARCHAR(50),
 	facebook_u_id VARCHAR(50), 
-    name VARCHAR(50),
+    name VARCHAR(200),
     place TINYTEXT,
     city VARCHAR(50),
     zip VARCHAR(20),
@@ -78,7 +78,7 @@ CREATE TABLE reddit_recommender.facebook_events(
 #Creating the Groups Table    
 DROP TABLE IF EXISTS reddit_recommender.facebook_groups;
 CREATE TABLE reddit_recommender.facebook_groups(
-	g_id INT AUTO_INCREMENT,
+	g_id VARCHAR(50),
 	facebook_u_id VARCHAR(50), 
     name VARCHAR(100),
     description LONGTEXT,
