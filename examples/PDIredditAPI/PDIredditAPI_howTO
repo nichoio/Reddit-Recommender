@@ -1,4 +1,0 @@
-1. run subreddits.sql on your database
-2. PDI: File -> Import from XML file (redditAPIexample.kjb and APIgetData.ktr)
-3. PDI define database connection: File -> new -> Database Connection 
-4. PDI: in Transformation APIgetData: edit step table output: setDatabase Connetion
