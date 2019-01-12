@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>APIgetData</name>
+    <name>TweetsToTable</name>
     <description />
     <extended_description />
     <trans_version />
     <trans_type>Normal</trans_type>
+    <trans_status>0</trans_status>
     <directory>/</directory>
     <parameters>
     </parameters>
@@ -427,23 +428,23 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2018/11/11 11:23:46.089</created_date>
+    <created_date>2018/12/02 13:48:21.381</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2018/11/11 11:23:46.089</modified_date>
+    <modified_date>2018/12/02 13:48:21.381</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
   </notepads>
   <connection>
-    <name>reddit</name>
+    <name>DockerMySql</name>
     <server>localhost</server>
-    <type>POSTGRESQL</type>
+    <type>MYSQL</type>
     <access>Native</access>
-    <database>postgres</database>
-    <port>5432</port>
-    <username>postgres</username>
-    <password>Encrypted 2be98afc86aa7f2e4cb79fd2288cbfc8f</password>
+    <database>db</database>
+    <port>3306</port>
+    <username>root</username>
+    <password>Encrypted 2be98afc86aa7f2e4bb18bd63c99dbdde</password>
     <servername />
     <data_tablespace />
     <index_tablespace />
@@ -462,7 +463,7 @@
       </attribute>
       <attribute>
         <code>PORT_NUMBER</code>
-        <attribute>5432</attribute>
+        <attribute>3306</attribute>
       </attribute>
       <attribute>
         <code>PRESERVE_RESERVED_WORD_CASE</code>
@@ -471,6 +472,10 @@
       <attribute>
         <code>QUOTE_ALL_FIELDS</code>
         <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>STREAM_RESULTS</code>
+        <attribute>Y</attribute>
       </attribute>
       <attribute>
         <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
@@ -488,66 +493,13 @@
   </connection>
   <order>
     <hop>
-      <from>Generate Rows</from>
-      <to>REST Client</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>REST Client</from>
-      <to>JSON Input</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>JSON Input</from>
-      <to>Table output</to>
+      <from>Tweets input</from>
+      <to>Write Tweets to table</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Generate Rows</name>
-    <type>RowGenerator</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <name>url</name>
-        <type>String</type>
-        <format />
-        <currency />
-        <decimal />
-        <group />
-        <nullif>https://www.reddit.com/subreddits.json</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-    <limit>1</limit>
-    <never_ending>N</never_ending>
-    <interval_in_ms>5000</interval_in_ms>
-    <row_time_field>now</row_time_field>
-    <last_time_field>FiveSecondsAgo</last_time_field>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>176</xloc>
-      <yloc>176</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>JSON Input</name>
+    <name>Tweets input</name>
     <type>JsonInput</type>
     <description />
     <distribute>Y</distribute>
@@ -564,11 +516,12 @@
     <readurl>N</readurl>
     <removeSourceField>N</removeSourceField>
     <IsIgnoreEmptyFile>N</IsIgnoreEmptyFile>
-    <doNotFailIfNoFile>Y</doNotFailIfNoFile>
-    <ignoreMissingPath>Y</ignoreMissingPath>
+    <doNotFailIfNoFile>N</doNotFailIfNoFile>
+    <ignoreMissingPath>N</ignoreMissingPath>
+    <defaultPathLeafToNull>Y</defaultPathLeafToNull>
     <rownum_field />
     <file>
-      <name />
+      <name>/Users/alexander/Documents/Studium/Master Information Systems/WS 1819/Data Integration/Projekt/Twitter/${twitter_user}Tweets.json</name>
       <filemask />
       <exclude_filemask />
       <file_required>N</file_required>
@@ -576,73 +529,21 @@
     </file>
     <fields>
       <field>
+        <name>text</name>
+        <path>$.*.text</path>
+        <type>String</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
         <name>id</name>
-        <path>$..id</path>
-        <type>String</type>
-        <format />
-        <currency />
-        <decimal />
-        <group />
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>language</name>
-        <path>$..lang</path>
-        <type>String</type>
-        <format />
-        <currency />
-        <decimal />
-        <group />
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>title</name>
-        <path>$..title</path>
-        <type>String</type>
-        <format />
-        <currency />
-        <decimal />
-        <group />
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>display_name</name>
-        <path>$..display_name</path>
-        <type>String</type>
-        <format />
-        <currency />
-        <decimal />
-        <group />
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>advertiser_category</name>
-        <path>$..advertiser_category</path>
-        <type>String</type>
-        <format />
-        <currency />
-        <decimal />
-        <group />
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>subscribers</name>
-        <path>$..subscribers</path>
+        <path>$.*.id</path>
         <type>Integer</type>
         <format />
         <currency />
@@ -654,8 +555,47 @@
         <repeat>N</repeat>
       </field>
       <field>
-        <name>public_description</name>
-        <path>$..public_description</path>
+        <name>retweet_count</name>
+        <path>$.*.retweet_count</path>
+        <type>Integer</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>favorite_count</name>
+        <path>$.*.favorite_count</path>
+        <type>Integer</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>created_at</name>
+        <path>$.*.created_at</path>
+        <type>String</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>screen_name</name>
+        <path>$.*.user.screen_name</path>
         <type>String</type>
         <format />
         <currency />
@@ -668,9 +608,9 @@
       </field>
     </fields>
     <limit>0</limit>
-    <IsInFields>Y</IsInFields>
+    <IsInFields>N</IsInFields>
     <IsAFile>N</IsAFile>
-    <valueField>result</valueField>
+    <valueField />
     <shortFileFieldName />
     <pathFieldName />
     <hiddenFieldName />
@@ -687,64 +627,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>480</xloc>
-      <yloc>176</yloc>
+      <xloc>256</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>REST Client</name>
-    <type>Rest</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <applicationType>JSON</applicationType>
-    <method>GET</method>
-    <url />
-    <urlInField>Y</urlInField>
-    <dynamicMethod>N</dynamicMethod>
-    <methodFieldName />
-    <urlField>url</urlField>
-    <bodyField />
-    <httpLogin />
-    <httpPassword>Encrypted </httpPassword>
-    <proxyHost />
-    <proxyPort />
-    <preemptive>N</preemptive>
-    <trustStoreFile />
-    <trustStorePassword>Encrypted </trustStorePassword>
-    <headers>
-      </headers>
-    <parameters>
-      </parameters>
-    <matrixParameters>
-      </matrixParameters>
-    <result>
-      <name>result</name>
-      <code />
-      <response_time />
-      <response_header />
-    </result>
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>336</xloc>
-      <yloc>176</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Table output</name>
+    <name>Write Tweets to table</name>
     <type>TableOutput</type>
     <description />
     <distribute>Y</distribute>
@@ -754,13 +643,13 @@
       <method>none</method>
       <schema_name />
     </partitioning>
-    <connection>reddit</connection>
-    <schema />
-    <table>subreddits</table>
-    <commit>1000</commit>
-    <truncate>Y</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
+    <connection>DockerMySql</connection>
+    <schema>reddit_recommender</schema>
+    <table>twitter_tweets</table>
+    <commit>10</commit>
+    <truncate>N</truncate>
+    <ignore_errors>Y</ignore_errors>
+    <use_batch>N</use_batch>
     <specify_fields>Y</specify_fields>
     <partitioning_enabled>N</partitioning_enabled>
     <partitioning_field />
@@ -773,32 +662,28 @@
     <return_field />
     <fields>
       <field>
+        <column_name>screen_name</column_name>
+        <stream_name>screen_name</stream_name>
+      </field>
+      <field>
+        <column_name>text</column_name>
+        <stream_name>text</stream_name>
+      </field>
+      <field>
         <column_name>id</column_name>
         <stream_name>id</stream_name>
       </field>
       <field>
-        <column_name>language</column_name>
-        <stream_name>language</stream_name>
+        <column_name>retweet_count</column_name>
+        <stream_name>retweet_count</stream_name>
       </field>
       <field>
-        <column_name>title</column_name>
-        <stream_name>title</stream_name>
+        <column_name>favorite_count</column_name>
+        <stream_name>favorite_count</stream_name>
       </field>
       <field>
-        <column_name>display_name</column_name>
-        <stream_name>display_name</stream_name>
-      </field>
-      <field>
-        <column_name>subscribers</column_name>
-        <stream_name>subscribers</stream_name>
-      </field>
-      <field>
-        <column_name>advertiser_category</column_name>
-        <stream_name>advertiser_category</stream_name>
-      </field>
-      <field>
-        <column_name>public_description</column_name>
-        <stream_name>public_description</stream_name>
+        <column_name>created_at</column_name>
+        <stream_name>created_at</stream_name>
       </field>
     </fields>
     <cluster_schema />
@@ -809,8 +694,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>608</xloc>
-      <yloc>176</yloc>
+      <xloc>560</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

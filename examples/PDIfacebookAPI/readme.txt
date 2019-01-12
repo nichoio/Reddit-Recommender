@@ -1,0 +1,1 @@
+the mysql-connector has to be copied into the Pentaho Data Integration -> lib folder to be able to establish a connection with the mysql database!
