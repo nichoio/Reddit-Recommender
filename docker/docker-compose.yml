@@ -1,9 +1,20 @@
-our-mysql:
-    image: reddit-rec
-    command: mysqld --default-authentication-plugin=mysql_native_password
-    ports:
-        - 3306:3306
-    environment:
-        - 'MYSQL_ROOT_HOST=172.17.0.1'
-        - 'MYSQL_ROOT_PASSWORD=password'
-        - 'MYSQL_ONETIME_PASSWORD='
+version: '3.6'
+services:
+  reddit-mysql:
+      build:
+          context: .
+          dockerfile: Dockerfile_mysql
+      command: mysqld --default-authentication-plugin=mysql_native_password
+      ports:
+          - 3306:3306
+      environment:
+          - 'MYSQL_ROOT_HOST=172.17.0.1'
+          - 'MYSQL_ROOT_PASSWORD=password'
+          - 'MYSQL_ONETIME_PASSWORD='
+  reddit-pdi:
+      build:
+          context: .
+          dockerfile: Dockerfile_pdi
+      command: tail -f /dev/null
+      depends_on:
+          - reddit-mysql
