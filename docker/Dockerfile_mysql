@@ -1,3 +1,4 @@
 FROM mysql
 
+COPY ./sqlkomplett.sql /tmp
 RUN echo "bind-address = 0.0.0.0" >> /etc/mysql/my.cnf
