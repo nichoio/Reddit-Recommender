@@ -9,6 +9,7 @@ import MySQLdb
 import sys
 import itertools
 import csv
+import pickle
 
 #Helper functions
 def flatten(list):
@@ -95,15 +96,17 @@ def unique_list(l):
 def filterWords(text):
 	data = text
 	stopWords = set(stopwords.words('german'))
+	unwantedWords = ['None','Impressum', 'impressum']
 	tokenizer = RegexpTokenizer(r'\w+')
 	words = tokenizer.tokenize(data)
 	wordsFiltered = []
 
-	for w in words: 
-		if w not in stopWords: 
-			wordsFiltered.append(w)
-			
-	wordsForRec = unique_list(wordsFiltered)
+	#for w in words: 
+	#	if w not in stopWords: 
+	#		wordsFiltered.append(w)
+	wordsFiltered = [word for word in words if word not in stopWords]
+	removeUnwanted = [word for word in wordsFiltered if word not in unwantedWords]	
+	wordsForRec = unique_list(removeUnwanted)
 	return wordsForRec
 	
 def analyzeData(data): 
@@ -111,12 +114,13 @@ def analyzeData(data):
 	for word in data: 
 		userWordsList.append(filterWords(str(word)))
 		
-	flattenWordsList = flatten(userWordsList)
-	countWords = Counter(list(flattenWordsList))
+	flattenWordsList = list(flatten(userWordsList))
+	countWords = Counter(flattenWordsList)
 	#needs to be written to a file 
+
 	return countWords
 	
 
-analyzeData(user_data)
+print(analyzeData(user_data))
 #print(likes)
 
