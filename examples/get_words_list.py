@@ -117,12 +117,15 @@ def analyzeData(data):
 		userWordsList.append(filterWords(str(word)))
 		
 	flattenWordsList = list(flatten(userWordsList))
+	#Additionally add data such as likes_name 'as they are'
+	flattenWordsList = flattenWordsList + posts_place + likes_name + groups_name + events_name + events_place
 	countWords = Counter(flattenWordsList)
 	#needs to be written to a file 
 	data = dict((x,y) for x, y in countWords.most_common())
 	
 	with open("output.txt", mode="w") as f: 
-		f.write(json.dumps(data, ensure_ascii=False))
+		f.write(json.dumps(data))
+	
 	return countWords
 	
 
