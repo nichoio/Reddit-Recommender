@@ -1,3 +1,4 @@
+# -*- coding: iso-8859-1 -*-
 from collections import Counter
 from sklearn.feature_extraction.text import CountVectorizer 
 from sklearn.metrics.pairwise import cosine_similarity 
@@ -10,6 +11,7 @@ import sys
 import itertools
 import csv
 import pickle
+import json
 
 #Helper functions
 def flatten(list):
@@ -117,7 +119,10 @@ def analyzeData(data):
 	flattenWordsList = list(flatten(userWordsList))
 	countWords = Counter(flattenWordsList)
 	#needs to be written to a file 
-
+	data = dict((x,y) for x, y in countWords.most_common())
+	
+	with open("output.txt", mode="w") as f: 
+		f.write(json.dumps(data, ensure_ascii=False))
 	return countWords
 	
 
