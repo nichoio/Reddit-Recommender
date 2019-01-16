@@ -1,7 +1,5 @@
 FROM openjdk:8
 
-WORKDIR /usr/src/app
-
 # curl
 RUN apt-get update && \
     apt-get install -y curl && \
@@ -14,9 +12,17 @@ ENV PDI_RELEASE=8.1 \
     KETTLE_HOME=/pentaho-di
 
 RUN cd /tmp && \
-	curl -LO https://downloads.sourceforge.net/project/pentaho/Pentaho%208.1/client-tools/pdi-ce-8.1.0.0-365.zip && \
-	unzip -q /tmp/pdi-ce-8.1.0.0-365.zip -d ~/8.1 && \
-	rm /tmp/pdi-ce-8.1.0.0-365.zip && \
-	cd ~
+    curl -LO https://downloads.sourceforge.net/project/pentaho/Pentaho%208.1/client-tools/pdi-ce-8.1.0.0-365.zip && \
+    unzip -q /tmp/pdi-ce-8.1.0.0-365.zip -d ~/8.1 && \
+    rm /tmp/pdi-ce-8.1.0.0-365.zip && \
+    cd ~
 
 ENV PATH=$PDI_HOME/data-integration:$PATH
+
+# Java mysql driver
+RUN cd /tmp &&\
+    curl -LO https://cdn.mysql.com//Downloads/Connector-J/mysql-connector-java-5.1.47.zip &&\
+    unzip -q /tmp/mysql-connector-java-5.1.47.zip -d /tmp && \
+    rm /tmp/mysql-connector-java-5.1.47.zip && \
+    cp /tmp/mysql-connector-java-5.1.47/mysql-connector-java-5.1.47.jar ~/8.1/data-integration/lib && \
+    rm -r /tmp/mysql-connector-java-5.1.47
