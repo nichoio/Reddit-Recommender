@@ -26,3 +26,9 @@ RUN cd /tmp &&\
     rm /tmp/mysql-connector-java-5.1.47.zip && \
     cp /tmp/mysql-connector-java-5.1.47/mysql-connector-java-5.1.47.jar ~/8.1/data-integration/lib && \
     rm -r /tmp/mysql-connector-java-5.1.47
+
+# Python
+RUN apt-get install -y python3-pip
+
+COPY requirements.txt /tmp
+RUN pip3 install --no-cache-dir -r /tmp/requirements.txt
