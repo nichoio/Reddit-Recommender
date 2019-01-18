@@ -314,8 +314,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>768</xloc>
-      <yloc>48</yloc>
+      <xloc>1088</xloc>
+      <yloc>64</yloc>
     </entry>
     <entry>
       <name>Get API Data</name>
@@ -374,8 +374,8 @@ parent_job.stopAll(); </script>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>576</xloc>
-      <yloc>96</yloc>
+      <xloc>560</xloc>
+      <yloc>80</yloc>
     </entry>
     <entry>
       <name>count reddits before</name>
