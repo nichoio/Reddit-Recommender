@@ -1,0 +1,8 @@
+FROM tiangolo/uwsgi-nginx-flask:python3.7
+
+WORKDIR /app
+
+COPY ./app /app
+
+EXPOSE 5000
+RUN export FLASK_APP=/app/app.py
