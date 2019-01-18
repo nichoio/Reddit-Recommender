@@ -437,7 +437,7 @@
   </notepads>
   <connection>
     <name>reddit</name>
-    <server>172.18.0.2</server>
+    <server>reddit-mysql</server>
     <type>MYSQL</type>
     <access>Native</access>
     <database>reddit_recommender</database>
