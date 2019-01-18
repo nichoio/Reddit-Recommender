@@ -18,3 +18,12 @@ services:
       command: tail -f /dev/null
       depends_on:
           - reddit-mysql
+  reddit-flask:
+      build:
+          context: .
+          dockerfile: Dockerfile_flask
+      command: flask run --host=0.0.0.0
+      depends_on:
+          - reddit-mysql
+      ports:
+          - 5000:5000
