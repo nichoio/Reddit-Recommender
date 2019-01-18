@@ -1,11 +1,8 @@
-FROM tiangolo/uwsgi-nginx-flask:python3.7
+FROM reddit-recommender_reddit-pdi
 
 WORKDIR /app
 
 COPY ./app /app
-
-COPY requirements.txt /tmp
-RUN pip3 install --no-cache-dir -r /tmp/requirements.txt
 
 EXPOSE 5000
 RUN export FLASK_APP=/app/app.py
