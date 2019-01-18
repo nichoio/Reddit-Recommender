@@ -1,7 +1,6 @@
 bs4
 facebook-sdk==3.1.0
 fuzzywuzzy
-MySQL-python
 nltk
 python-twitter==3.5
 scikit-learn
