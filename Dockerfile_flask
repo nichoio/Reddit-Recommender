@@ -4,5 +4,9 @@ WORKDIR /app
 
 COPY ./app /app
 
+COPY requirements.txt /tmp
+RUN pip3 install --no-cache-dir -r /tmp/requirements.txt
+
 EXPOSE 5000
 RUN export FLASK_APP=/app/app.py
+RUN export FLASK_DEBUG=1
