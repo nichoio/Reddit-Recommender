@@ -437,13 +437,13 @@
   </notepads>
   <connection>
     <name>reddit</name>
-    <server>localhost</server>
-    <type>POSTGRESQL</type>
+    <server>172.18.0.2</server>
+    <type>MYSQL</type>
     <access>Native</access>
-    <database>postgres</database>
-    <port>5432</port>
-    <username>postgres</username>
-    <password>Encrypted 2be98afc86aa7f2e4cb79fd2288cbfc8f</password>
+    <database>reddit_recommender</database>
+    <port>3306</port>
+    <username>root</username>
+    <password>Encrypted 2be98afc86aa7f2e4bb18bd63c99dbdde</password>
     <servername />
     <data_tablespace />
     <index_tablespace />
@@ -462,7 +462,7 @@
       </attribute>
       <attribute>
         <code>PORT_NUMBER</code>
-        <attribute>5432</attribute>
+        <attribute>3306</attribute>
       </attribute>
       <attribute>
         <code>PRESERVE_RESERVED_WORD_CASE</code>
@@ -471,6 +471,10 @@
       <attribute>
         <code>QUOTE_ALL_FIELDS</code>
         <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>STREAM_RESULTS</code>
+        <attribute>Y</attribute>
       </attribute>
       <attribute>
         <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
@@ -506,7 +510,7 @@
     </partitioning>
     <fields>
       <field>
-        <field_name>count</field_name>
+        <field_name>COUNT(*)</field_name>
         <variable_name>NUMBER_SUBREDDITS_AFTER</variable_name>
         <variable_type>PARENT_JOB</variable_type>
         <default_value>2</default_value>
