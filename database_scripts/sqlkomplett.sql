@@ -22,13 +22,13 @@ CREATE TABLE reddit_recommender.user(
 #######################
 DROP TABLE IF EXISTS reddit_recommender.subreddits;
 CREATE TABLE reddit_recommender.subreddits( 
-    id VARCHAR(50), 
     title VARCHAR(400), 
     display_name VARCHAR(400), 
-    subscribers INT,
+    subscribers int,
     language VARCHAR(100),
     advertiser_category VARCHAR(200),
-    public_description VARCHAR(1000),
+    public_description longtext,
+    description longtext,
     PRIMARY KEY(display_name))
 ;
 
