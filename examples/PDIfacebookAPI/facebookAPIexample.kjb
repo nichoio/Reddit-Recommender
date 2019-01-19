@@ -357,8 +357,8 @@
       <name>startfacebookpythonscript.sh</name>
       <description />
       <type>SHELL</type>
-      <filename>C:\Users\Dominik\DaIn - Recommender System\examples\facebook\startfacebookpythonscript.sh</filename>
-      <work_directory />
+      <filename />
+      <work_directory>${Internal.Job.Filename.Directory}</work_directory>
       <arg_from_previous>N</arg_from_previous>
       <exec_per_row>N</exec_per_row>
       <set_logfile>N</set_logfile>
@@ -368,7 +368,7 @@
       <add_date>N</add_date>
       <add_time>N</add_time>
       <insertScript>Y</insertScript>
-      <script>python C:/Users/Dominik/"DaIn - Recommender System"/examples/PDIfacebookAPI/facebook_api.py</script>
+      <script>python facebook_api.py</script>
       <loglevel>Basic</loglevel>
       <parallel>N</parallel>
       <draw>Y</draw>
