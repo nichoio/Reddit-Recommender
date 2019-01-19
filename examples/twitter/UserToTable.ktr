@@ -630,7 +630,7 @@
       <schema_name />
     </partitioning>
     <connection>DockerMySql</connection>
-    <schema>reddit.recommender</schema>
+    <schema>reddit_recommender</schema>
     <table>twitter_friends_user</table>
     <commit>10</commit>
     <truncate>N</truncate>
