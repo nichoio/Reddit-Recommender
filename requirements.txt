@@ -8,3 +8,4 @@ PyMySQL
 python-twitter==3.5
 scikit-learn
 SQLAlchemy
+mysqlclient
