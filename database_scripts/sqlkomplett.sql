@@ -1,4 +1,3 @@
-##Creating the Reddit Recommender Schema where the tables will be stored in 
 CREATE SCHEMA IF NOT EXISTS reddit_recommender; 
 
 #######################
@@ -15,7 +14,7 @@ CREATE TABLE reddit_recommender.user(
     facebook_u_id VARCHAR(50) UNIQUE, 
     twitter_screen_name VARCHAR(50) UNIQUE, 
     reddit_u_id VARCHAR(50) UNIQUE,
-    PRIMARY KEY(facebook_u_id));
+    PRIMARY KEY(name));
     
 #######################
 #REDDIT DATA RELATED#
@@ -112,7 +111,7 @@ CREATE TABLE reddit_recommender.twitter_tweets(
 	favorite_count int,
 	created_at varchar(255),
 	PRIMARY KEY (id),
-    FOREIGN KEY (screen_name) REFERENCES reddit_recommender.user(twitter_screen_name)
+    FOREIGN KEY (screen_name) REFERENCES reddit_recommender.user(twitter_screen_name) ON DELETE CASCADE
 );
 
 DROP TABLE IF EXISTS reddit_recommender.twitter_hashtags;
@@ -120,7 +119,7 @@ CREATE TABLE reddit_recommender.twitter_hashtags(
     hashtag varchar(255) NOT NULL,
     tweetId bigint NOT NULL,
     PRIMARY KEY(hashtag, tweetId),
-    FOREIGN KEY (tweetId) REFERENCES reddit_recommender.twitter_tweets(id)
+    FOREIGN KEY (tweetId) REFERENCES reddit_recommender.twitter_tweets(id) ON DELETE CASCADE
 );
 
 DROP TABLE IF EXISTS reddit_recommender.twitter_friends_user;
@@ -139,6 +138,6 @@ CREATE TABLE reddit_recommender.twitter_friends(
     screen_name varchar(255),
     followed_user varchar(255),
     PRIMARY KEY(screen_name, followed_user),
-    FOREIGN KEY (followed_user) REFERENCES reddit_recommender.twitter_friends_user(screen_name),
-    FOREIGN KEY(screen_name) REFERENCES reddit_recommender.user(twitter_screen_name)
+    FOREIGN KEY (followed_user) REFERENCES reddit_recommender.twitter_friends_user(screen_name) ON DELETE CASCADE,
+    FOREIGN KEY(screen_name) REFERENCES reddit_recommender.user(twitter_screen_name) ON DELETE CASCADE
 );
