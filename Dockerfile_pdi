@@ -1,5 +1,7 @@
 FROM openjdk:8
 
+COPY ./pentaho /pentaho
+
 # curl
 RUN apt-get update && \
     apt-get install -y curl && \
@@ -8,8 +10,7 @@ RUN apt-get update && \
 # Pentaho
 ENV PDI_RELEASE=8.1 \
     PDI_VERSION=8.1.0.0-365 \
-    PDI_HOME=/opt/pentaho-di \
-    KETTLE_HOME=/pentaho-di
+    PDI_HOME=/root/8.1./data-integration
 
 RUN cd /tmp && \
     curl -LO https://downloads.sourceforge.net/project/pentaho/Pentaho%208.1/client-tools/pdi-ce-8.1.0.0-365.zip && \
