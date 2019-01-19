@@ -42,7 +42,7 @@ def get_facebook_data(facebook_u_id):
 	if(facebook_u_id == None):
 		print("The user has no Facebook account")
 		
-	cursor.execute("select name, category, about, genre from facebook_likes where facebook_u_id = " + facebook_u_id + ";")
+	cursor.execute("select name, category, about, genre from reddit_recommender.facebook_likes where facebook_u_id = " + facebook_u_id + ";")
 
 	likes = cursor.fetchall()
 	likes_name = []
@@ -57,7 +57,7 @@ def get_facebook_data(facebook_u_id):
 		
 	facebook_likes = likes_name + likes_category + likes_about + likes_genre
 
-	cursor.execute("select message, place from facebook_posts where message is not null and facebook_u_id = " + facebook_u_id + ";")
+	cursor.execute("select message, place from reddit_recommender.facebook_posts where message is not null and facebook_u_id = " + facebook_u_id + ";")
 
 	posts = cursor.fetchall()
 	posts_message = []
@@ -69,7 +69,7 @@ def get_facebook_data(facebook_u_id):
 	facebook_posts = posts_message + posts_place
 		
 
-	cursor.execute("select name, place, city, zip, country, rsvp_status from facebook_events where facebook_u_id = " + facebook_u_id + ";")
+	cursor.execute("select name, place, city, zip, country, rsvp_status from reddit_recommender.facebook_events where facebook_u_id = " + facebook_u_id + ";")
 
 	events = cursor.fetchall()
 	events_name = []
@@ -88,7 +88,7 @@ def get_facebook_data(facebook_u_id):
 		
 	facebook_events = events_name + events_place + events_city + events_zip + events_country + events_rsvp
 
-	cursor.execute("select name, description from facebook_groups where facebook_u_id = " + facebook_u_id + ";")
+	cursor.execute("select name, description from reddit_recommender.facebook_groups where facebook_u_id = " + facebook_u_id + ";")
 
 	groups = cursor.fetchall()
 	groups_name = []
@@ -108,7 +108,7 @@ def get_twitter_data(twitter_screen_name):
 	if(twitter_screen_name == None):
 		print("The user has no Twitter account")
 		
-	cursor.execute("select text from twitter_tweets")
+	cursor.execute("select text from reddit_recommender.twitter_tweets where screen_name = '" + twitter_screen_name + "';")
 	tweets = cursor.fetchall()
 	tweets_text = []
 	for tweet in range(len(tweets)):
@@ -116,14 +116,14 @@ def get_twitter_data(twitter_screen_name):
 		
 	twitter_tweets = tweets_text
 		
-	cursor.execute("select hashtag from twitter_hashtags")
+	cursor.execute("select hashtag from reddit_recommender.twitter_hashtags where tweetId IN (select id from reddit_recommender.twitter_tweets where screen_name = '" + twitter_screen_name + "');")
 	hashtags = cursor.fetchall()
 	for hashtag in range(len(hashtags)): 
 		tweets_hashtag.append(hashtags[hastag][0])
 		
 	twitter_hashtags = tweets_hashtag
 		
-	cursor.execute("select display_name, description from twitter_friends")
+	cursor.execute("select display_name, description from reddit_recommender.twitter_friends_user where screen_name IN (select followed_user from reddit_recommender.twitter_friends where screen_name = '" + twitter_screen_name + "');")
 	twitter_friends_users = cursor.fetchall()
 	twitter_friends_users_display_name = []
 	twitter_friends_users_description = []
@@ -139,9 +139,7 @@ def get_twitter_data(twitter_screen_name):
 	
 #Reddit 
 def get_reddit_data(reddit_u_id):
-	if(reddit_u_id == None):
-		print("The user has no Reddit account")
-	cursor.execute("select title, display_name, advertiser_category, public_description from subreddits")
+	cursor.execute("select title, display_name, advertiser_category, public_description from reddit_recommender.subreddits where display_name in (select display_name from reddit_recommender.reddit_personal where user_name = '" + reddit_u_id + "');")
 	subreddits = cursor.fetchall()
 	subreddits_title = []
 	subreddits_display_name = []
@@ -155,7 +153,7 @@ def get_reddit_data(reddit_u_id):
 		
 	reddit_subreddits = subreddits_title + subreddits_display_name + subreddits_advertiser_category + subreddits_public_description
 
-	cursor.execute("select comments from reddit_personal")
+	cursor.execute("select comments from reddit_recommender.reddit_personal where user_name = '" + reddit_u_id + "';")
 	reddit_personal = cursor.fetchall()
 	reddit_personal_comments = []
 	for comment in range(len(reddit_personal)): 
@@ -195,16 +193,40 @@ def analyzeData(data):
 	flattenWordsList = flattenWordsList #+ posts_place + likes_name + groups_name + events_name + events_place
 	countWords = Counter(flattenWordsList)
 	#needs to be written to a file 
-	data = dict((x,y) for x, y in countWords.most_common())
+	#data = dict((x,y) for x, y in countWords.most_common())
 	
-	with open("output.txt", mode="w") as f: 
-		f.write(json.dumps(data))
+	#with open("output.txt", mode="w") as f: 
+	#	f.write(json.dumps(data))
 	
 	return countWords
-	
+
+#Just a test and a blueprint for getting a file with lists of count words for specific subreddits
+#Can be deleted if the get_subreddit_words_list works
+def append_posts_to_file():
+	cursor.execute("select * from reddit_recommender.posts")
+	these_posts = cursor.fetchall()	
+	flatten_these_posts = []
+	file = open("output_posts.txt", mode="w")
+	for i in range(len(these_posts)):
+		userWordsList = []
+		for word in these_posts[i]: 
+			userWordsList.append(filterWords(str(word)))
+			
+		flattenWordsList = list(flatten(userWordsList))
+		#Additionally add data such as likes_name 'as they are'
+		flattenWordsList = flattenWordsList #+ posts_place + likes_name + groups_name + events_name + events_place
+		countWords = Counter(flattenWordsList)
+		#needs to be written to a file 
+		data = dict((x,y) for x, y in countWords.most_common())
+		
+		file.write(json.dumps(data)+'\n')
+		
+	file.close()
+
+append_posts_to_file()
 rec_user = get_user('Dominik Mollers')
-user_data = get_facebook_data(rec_user[0][1]) + get_twitter_data(rec_user[0][2]) + get_reddit_data(rec_user[0][3])
+user_data = get_facebook_data(rec_user[0][1]) #+ get_twitter_data(rec_user[0][2]) + get_reddit_data(rec_user[0][3])
 print(analyzeData(user_data))
-#print(rec_user[0][3])
+
 
 cursor.close()
