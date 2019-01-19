@@ -2,11 +2,11 @@ import json
 
 import praw
 
-CLIENT_ID = 'hn7qi5bxIVgXBg'
-CLIENT_SECRET = 'dCVJ0MpJ2NzFugKN-G9BiYxBrok'
+CLIENT_ID = ''
+CLIENT_SECRET = ''
 REDIRECT_URI = 'http://localhost:5000/redirect-reddit'
 USER_AGENT = 'reddit-recommender:v1.2'
-JSON_PATH = 'reddit_user.json'
+JSON_PATH = '/tmp/reddit_user.json'
 
 
 def gen_praw_object():
@@ -35,9 +35,9 @@ def save_subs(refresh_token):
     user = reddit.user.me()
     subscribed = [s.display_name for s in list(reddit.user.subreddits(limit=None))]
     subscribed_data = [{
-        'sub_name': s,
+        'display_name': s,
         'user_name': user.name,
-        'subscribed': True}
+        'subscribed': 1}
         for s in subscribed]
 
     comments_subs = [c.subreddit.display_name for c in user.comments.new()]
@@ -45,17 +45,17 @@ def save_subs(refresh_token):
 
     # get amount of comments for all subscribed subs
     for s in subscribed_data:
-        if s['sub_name'] in comment_freq:
-            s['comments'] = comment_freq[s['sub_name']]
+        if s['display_name'] in comment_freq:
+            s['comments'] = comment_freq[s['display_name']]
         else:
             s['comments'] = 0
 
     # add subs with comments but no subscription
     commented_no_sub = set(list(comment_freq.keys())) - set(subscribed)
     commented_data = [{
-        'sub_name': c,
+        'display_name': c,
         'user_name': user.name,
-        'subscribed': False,
+        'subscribed': 0,
         'comments': comment_freq[c]}
         for c in commented_no_sub]
 

@@ -1,13 +1,13 @@
 import sqlalchemy
 from flask import Flask, redirect, render_template, request
 
-from .reddit_subscriptions import gen_praw_object, save_subs
+from . import reddit_subscriptions as rs
+from . import pdi
 
 REDDIT_CLIENT_ID = 'hn7qi5bxIVgXBg'
 REDDIT_PERMISSIONS = 'mysubreddits+identity+history'
 DB_PATH = 'mysql+pymysql://root:password@reddit-mysql/reddit_recommender'
 OAUTH_REDDIT = 'https://www.reddit.com/api/v1/authorize?state=123456&duration=permanent&scope={}&redirect_uri=http%3A%2F%2Flocalhost%3A5000%2Fredirect-reddit&client_id={}&response_type=code'.format(REDDIT_PERMISSIONS, REDDIT_CLIENT_ID)
-
 
 app = Flask(__name__)
 db = sqlalchemy.create_engine(DB_PATH)
@@ -26,9 +26,11 @@ def auth_reddit(name=None):
 @app.route('/redirect-reddit')
 def redirect_reddit(name=None):
     token_code = request.args.get('code')
-    refresh_token = gen_praw_object().auth.authorize(token_code)
-    save_subs(refresh_token)
-    return "success!"
+    refresh_token = rs.gen_praw_object().auth.authorize(token_code)
+    rs.save_subs(refresh_token)
+    job_result = pdi.run_trafo('reddit_subscriptions.ktr')
+    return job_result  # 0 = success
+
 
 @app.route('/db-test')
 def db_test():
