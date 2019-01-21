@@ -19,5 +19,5 @@ users = api.GetFriends(screen_name=USER_SCREEN_NAME)
 as_json = [json.loads(str(u)) for u in users]
 
 # write to file as JSON
-with open(USER_SCREEN_NAME+'Friends.json', 'w') as file:
+with open('/temp/'+USER_SCREEN_NAME+'Friends.json', 'w') as file:
     json.dump(as_json, file)

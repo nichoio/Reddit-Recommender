@@ -19,14 +19,14 @@ api = twitter.Api(consumer_key='',
 data = api.GetUserTimeline(screen_name=USER_SCREEN_NAME, count=TWEET_AMOUNT)
 as_json = [json.loads(str(d)) for d in data]
 if len(data) > 199:
-    data2  = api.GetUserTimeline(screen_name=USER_SCREEN_NAME, count=TWEET_AMOUNT, max_id=(data[199].id-1))
+    data2 = api.GetUserTimeline(screen_name=USER_SCREEN_NAME, count=TWEET_AMOUNT, max_id=(data[199].id-1))
     as_json.extend([json.loads(str(d)) for d in data2])
 
 # write to file as JSON
-with open(USER_SCREEN_NAME+'Tweets.json', 'w') as file:
+with open('/temp/'+USER_SCREEN_NAME+'Tweets.json', 'w') as file:
     json.dump(as_json, file)
 
 user = api.GetUser(screen_name=USER_SCREEN_NAME)
 user_as_json = [json.loads(str(user))]
-with open(USER_SCREEN_NAME+'User.json', 'w') as file:
+with open('/temp/'+USER_SCREEN_NAME+'User.json', 'w') as file:
     json.dump(user_as_json, file)
