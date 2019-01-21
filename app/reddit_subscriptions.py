@@ -2,8 +2,8 @@ import json
 
 import praw
 
-CLIENT_ID = ''
-CLIENT_SECRET = ''
+CLIENT_ID = 'hn7qi5bxIVgXBg'
+CLIENT_SECRET = 'dCVJ0MpJ2NzFugKN-G9BiYxBrok'
 REDIRECT_URI = 'http://localhost:5000/redirect-reddit'
 USER_AGENT = 'reddit-recommender:v1.2'
 JSON_PATH = '/tmp/reddit_user.json'
@@ -32,7 +32,7 @@ def save_subs(refresh_token):
                          user_agent=USER_AGENT,
                          refresh_token=refresh_token)
 
-    user = reddit.user.me()
+    user = reddit.user.me()  # TODO: is this correct????
     subscribed = [s.display_name for s in list(reddit.user.subreddits(limit=None))]
     subscribed_data = [{
         'display_name': s,
@@ -63,3 +63,12 @@ def save_subs(refresh_token):
 
     with open(JSON_PATH, 'w') as outfile:
         json.dump(subscribed_data, outfile)
+
+
+def get_u_id(refresh_token):
+    reddit = praw.Reddit(client_id=CLIENT_ID,
+                         client_secret=CLIENT_SECRET,
+                         user_agent=USER_AGENT,
+                         refresh_token=refresh_token)
+
+    return reddit.user.me().name
