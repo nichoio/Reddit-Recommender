@@ -6,14 +6,13 @@ CREATE SCHEMA IF NOT EXISTS reddit_recommender;
 DROP TABLE IF EXISTS reddit_recommender.user;
 CREATE TABLE reddit_recommender.user( 
     name VARCHAR(50), 
-    facebook_gender VARCHAR(10),
     twitter_name VARCHAR(50),
     twitter_followers_count INT,
     twitter_friends_count INT,
     twitter_description VARCHAR(500),
     facebook_u_id VARCHAR(50) UNIQUE, 
     twitter_screen_name VARCHAR(50) UNIQUE, 
-    reddit_u_id VARCHAR(50) UNIQUE,
+    reddit_name VARCHAR(50) UNIQUE,
     PRIMARY KEY(name));
     
 #######################
@@ -38,7 +37,7 @@ CREATE TABLE reddit_recommender.reddit_personal(
     comments TINYINT(1),
     PRIMARY KEY (user_name, display_name),
     FOREIGN KEY(display_name) REFERENCES reddit_recommender.subreddits(display_name) ON DELETE CASCADE,
-    FOREIGN KEY(user_name) REFERENCES reddit_recommender.user(reddit_u_id) ON DELETE CASCADE)
+    FOREIGN KEY(user_name) REFERENCES reddit_recommender.user(reddit_name) ON DELETE CASCADE)
 ;
 
 #######################
