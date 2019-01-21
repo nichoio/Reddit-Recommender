@@ -18,6 +18,11 @@ def flatten(list):
   for i in list:
     for j in i:
       yield j
+	  
+def unique_list(l):
+    ulist = []
+    [ulist.append(x) for x in l if x not in ulist]
+    return ulist
 
 #Getting the subreddit data from the database
 connection = MySQLdb.connect(host="localhost", user="root", passwd="password", db="reddit_recommender")
@@ -54,8 +59,8 @@ def append_subreddits_to_file():
 	file = open("output_subreddits.txt", mode="w")
 	for subreddit in range(len(subreddits)):
 		subredditWordsList = []
-		for word in subreddits[i]: 
-			subredditWordsList.append(filterWords(str(word))
+		for word in subreddits[subreddit]: 
+			subredditWordsList.append(filterWords(str(word)))
 			
 		flattenWordsList = list(flatten(subredditWordsList))
 		countWords = Counter(flattenWordsList)
