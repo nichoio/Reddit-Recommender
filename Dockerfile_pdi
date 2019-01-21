@@ -29,7 +29,10 @@ RUN cd /tmp &&\
     rm -r /tmp/mysql-connector-java-5.1.47
 
 # Python
-RUN apt-get install -y python3-pip
+RUN apt-get install -y python3-pip &&\
+    apt-get install -y python-dev default-libmysqlclient-dev &&\
+    apt-get install -y python3-dev
+
 
 COPY requirements.txt /tmp
 RUN pip3 install --no-cache-dir -r /tmp/requirements.txt
