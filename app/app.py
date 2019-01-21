@@ -5,6 +5,7 @@ import sqlalchemy
 from flask import Flask, jsonify, redirect, render_template, request
 
 from . import reddit_subscriptions as rs
+from . import loaduser as lu
 from . import pdi
 from ._facebook import api as fbapi
 
@@ -106,7 +107,11 @@ def load_user(name=None):
     with open(VAR_STORE, mode='r') as f:
         user_data = json.load(f)
 
-    # TODO: call loaduser    
+    lu.load_user(
+        user_data['name'],
+        TWITTER_SCREEN_NAME=user_data['name-twitter'],
+        FACEBOOK_U_ID=user_data['id-facebook'],
+        REDDIT_USER_NAME=user_data['name-reddit'])
     return redirect('/trigger-jobs')
 
 
