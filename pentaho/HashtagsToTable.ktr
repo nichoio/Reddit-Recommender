@@ -520,7 +520,7 @@
     <defaultPathLeafToNull>Y</defaultPathLeafToNull>
     <rownum_field />
     <file>
-      <name>/app/twitter/${twitter_user}Hashtags.json</name>
+      <name>/tmp/${twitter_user}Hashtags.json</name>
       <filemask />
       <exclude_filemask />
       <file_required>N</file_required>
