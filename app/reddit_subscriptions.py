@@ -2,8 +2,8 @@ import json
 
 import praw
 
-CLIENT_ID = 'hn7qi5bxIVgXBg'
-CLIENT_SECRET = 'dCVJ0MpJ2NzFugKN-G9BiYxBrok'
+CLIENT_ID = ''
+CLIENT_SECRET = ''
 REDIRECT_URI = 'http://localhost:5000/redirect-reddit'
 USER_AGENT = 'reddit-recommender:v1.2'
 JSON_PATH = '/tmp/reddit_user.json'
