@@ -25,7 +25,7 @@ def unique_list(l):
     return ulist
 
 #Getting the subreddit data from the database
-connection = MySQLdb.connect(host="localhost", user="root", passwd="password", db="reddit_recommender")
+connection = MySQLdb.connect(host="localhost", user="root", passwd="123+#abc", db="reddit_recommender")
 
 cursor = connection.cursor()
 
@@ -52,9 +52,17 @@ def filterWords(text):
 	wordsForRec = unique_list(removeUnwanted)
 	return wordsForRec
 	
+def get_subreddit_names(subreddit_screen_names): 
+	file = open("output_subreddit_screen_name.txt", mode = "w")
+	for subreddit_screen_name in range(len(subreddit_screen_names)): 
+		file.write(subreddit_screen_names[subreddit_screen_name][1]+'\n')
+		
+	file.close()
+	
 
 def append_subreddits_to_file():
 	subreddits = get_subreddits()
+	get_subreddit_names(subreddits)
 	analyze_subreddit_data = []
 	file = open("output_subreddits.txt", mode="w")
 	for subreddit in range(len(subreddits)):
@@ -64,7 +72,7 @@ def append_subreddits_to_file():
 			
 		flattenWordsList = list(flatten(subredditWordsList))
 		countWords = Counter(flattenWordsList)
-		data = dict((x,y) for x, y in countWords.mostCommon())
+		data = dict((x,y) for x, y in countWords.most_common())
 		
 		file.write(json.dumps(data)+'\n')
 		
