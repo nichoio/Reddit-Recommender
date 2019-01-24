@@ -1,3 +1,30 @@
 form {
-  font-size: 32px;
+  font-size: 24px;
+}
+
+img {
+  margin-bottom: 50px;
+}
+
+label {
+  font-weight: normal;
+  font-size: 24px;
+}
+
+.btn, .btn-primary, .btn-primary:hover {
+  background-color: rgb(252, 71, 30);
+  background-image: unset;
+  border-color: rgb(252, 71, 30);
+  font-size: 24px;
+}
+
+.jumbotron{
+  background-color: rgb(252, 71, 30);
+  color: white;
+  padding: 35px;
+  margin-bottom: 50px;
+}
+
+.jumbotron p{
+  font-size: 24px;
 }
