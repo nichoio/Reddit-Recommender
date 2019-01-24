@@ -600,7 +600,7 @@
     <ignoreMissingPath>Y</ignoreMissingPath>
     <rownum_field />
     <file>
-      <name>events.json</name>
+      <name>/tmp/fb_events.json</name>
       <filemask />
       <exclude_filemask />
       <file_required>N</file_required>
@@ -821,7 +821,7 @@
     <ignoreMissingPath>Y</ignoreMissingPath>
     <rownum_field />
     <file>
-      <name>groups.json</name>
+      <name>/tmp/fb_groups.json</name>
       <filemask />
       <exclude_filemask />
       <file_required>N</file_required>
@@ -1118,7 +1118,7 @@
     <ignoreMissingPath>Y</ignoreMissingPath>
     <rownum_field />
     <file>
-      <name>/tmp/likes.json</name>
+      <name>/tmp/fb_likes.json</name>
       <filemask />
       <exclude_filemask />
       <file_required>N</file_required>
@@ -1305,7 +1305,7 @@
     <ignoreMissingPath>Y</ignoreMissingPath>
     <rownum_field />
     <file>
-      <name>/tmp/personal.json</name>
+      <name>/tmp/fb_personal.json</name>
       <filemask />
       <exclude_filemask />
       <file_required>N</file_required>
@@ -1417,7 +1417,7 @@
     <ignoreMissingPath>Y</ignoreMissingPath>
     <rownum_field />
     <file>
-      <name>/tmp/posts.json</name>
+      <name>/tmp/fb_posts.json</name>
       <filemask />
       <exclude_filemask />
       <file_required>N</file_required>
