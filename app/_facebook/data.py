@@ -3,6 +3,7 @@
 ################### 
 import facebook
 import json
+import sys
 
 acc_token = sys.argv[1]
 #Graph instantiation

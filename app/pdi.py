@@ -6,9 +6,14 @@ PENTAHO_SCRIPTS = '/pentaho'
 
 
 def run_trafo(name):
-#    return subprocess.run([
-#        '{}/pan.sh'.format(PDI_PATH),
-#        '-file="{}/{}"'.format(PENTAHO_SCRIPTS, name)])
+    os.system('{}/pan.sh -file="{}/{}.ktr"'.format(PDI_PATH, PENTAHO_SCRIPTS, name))
+    return True
 
-    os.system('{}/pan.sh -file="{}/{}"'.format(PDI_PATH, PENTAHO_SCRIPTS, name))
-    return "success"
+
+def run_job(name, _param=None):
+    if _param:
+        os.system(('{}/kitchen.sh -file="{}/{}.kjb" -param:{}')
+            .format(PDI_PATH, PENTAHO_SCRIPTS, name, _param))
+    else:
+        os.system('{}/kitchen.sh -file="{}/{}.kjb"'.format(PDI_PATH, PENTAHO_SCRIPTS, name))
+    return True

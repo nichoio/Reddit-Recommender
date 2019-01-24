@@ -2,7 +2,7 @@ import json
 import os
 
 import sqlalchemy
-from flask import Flask, jsonify, redirect, render_template, request
+from flask import Flask, abort, jsonify, redirect, render_template, request
 
 from . import reddit_subscriptions as rs
 from . import loaduser as lu
@@ -12,7 +12,7 @@ from ._facebook import api as fbapi
 REDDIT_CLIENT_ID = ''
 REDDIT_PERMISSIONS = 'mysubreddits+identity+history'
 FACEBOOK_APP_ID = ''
-FACEBOOK_PERMISSIONS = 'public_profile,email,user_likes,user_posts,user_gender,user_events'
+FACEBOOK_PERMISSIONS = 'public_profile,email,user_likes,user_posts,user_gender,user_events,groups_access_member_info'
 OAUTH_REDDIT = 'https://www.reddit.com/api/v1/authorize?state=123456&duration=permanent&scope={}&redirect_uri=http%3A%2F%2Flocalhost%3A5000%2Fredirect-reddit&client_id={}&response_type=code'.format(REDDIT_PERMISSIONS, REDDIT_CLIENT_ID)
 OAUTH_FB = 'https://www.facebook.com/v3.2/dialog/oauth?client_id={}&redirect_uri=http%3A%2F%2Flocalhost%3A5000%2Fredirect-facebook&state=6548211&scope={}&response_type=token'.format(FACEBOOK_APP_ID, FACEBOOK_PERMISSIONS)
 DB_AUTH = 'mysql+pymysql://root:password@reddit-mysql/reddit_recommender'
@@ -31,6 +31,10 @@ def start(name=None):
 @app.route('/store-initial')
 def store_initial(name=None):
     params = _get_params(request.args)
+    try:
+        os.remove(VAR_STORE)
+    except FileNotFoundError:
+        pass  # ignore non existing file
     _update_json(params)
     return redirect('/userdata')
 
@@ -97,8 +101,6 @@ def redirect_reddit(name=None):
         'token-reddit': refresh_token,
         'name-reddit': reddit_name,
         'use-reddit': False})
-    #rs.save_subs(refresh_token)
-    #job_result = pdi.run_trafo('reddit_subscriptions.ktr')
     return redirect('/load-user', code=302)  # skip /userdata route
 
 
@@ -109,22 +111,40 @@ def load_user(name=None):
 
     lu.load_user(
         user_data['name'],
-        TWITTER_SCREEN_NAME=user_data['name-twitter'],
-        FACEBOOK_U_ID=user_data['id-facebook'],
-        REDDIT_USER_NAME=user_data['name-reddit'])
+        TWITTER_SCREEN_NAME=user_data['name-twitter'] if 'name-twitter' in user_data else None,
+        FACEBOOK_U_ID=user_data['id-facebook'] if 'id-facebook' in user_data else None,
+        REDDIT_USER_NAME=user_data['name-reddit'] if 'name-reddit' in user_data else None)
     return redirect('/trigger-jobs')
 
 
 @app.route('/trigger-jobs')
 def trigger_jobs(name=None):
-    # TODO: save personal data to DB
+    twitter_name = _read_json('name-twitter')
+    fb_token = _read_json('token-facebook')
+    reddit_token = _read_json('reddit_token')
+
+    if twitter_name:
+        job_param = 'twitter_user={}'.format(twitter_name)
+        if pdi.run_job('LoadTwitterData', job_param) is False:
+            abort(500)
+
+    if fb_token:
+        job_param = 'access_token={}'.format(fb_token)
+        if pdi.run_job('facebookAPIexample', job_param) is False:
+            abort(500)
+
+    if reddit_token:
+        rs.save_subs(reddit_token)
+        if pdi.run_trafo('reddit_subscriptions') is False:
+            abort(500)
+    
     return redirect('/recommendations', code=302)
 
 
 @app.route('/recommendations')
 def recommendations(name=None):
     # TODO: compute recs
-    #os.remove(VAR_STORE)
+    return "recs here" 
     return render_template('recommendations.html', name=name)
 
 
@@ -166,4 +186,7 @@ def _update_json(new_data):
 def _read_json(key):
     with open(VAR_STORE, mode='r') as f:
         data = json.load(f)
-        return data[key] 
+        try:
+            return data[key]
+        except KeyError:
+            return None
