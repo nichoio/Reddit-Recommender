@@ -1,26 +1,27 @@
 import json
 import os
 
-import sqlalchemy
 from flask import Flask, abort, jsonify, redirect, render_template, request
 
 from . import reddit_subscriptions as rs
+from . import commands as cmd
 from . import loaduser as lu
-from . import pdi
+from . import get_words_list as gwl
 from ._facebook import api as fbapi
 
 REDDIT_CLIENT_ID = ''
 REDDIT_PERMISSIONS = 'mysubreddits+identity+history'
 FACEBOOK_APP_ID = ''
 FACEBOOK_PERMISSIONS = 'public_profile,email,user_likes,user_posts,user_gender,user_events,groups_access_member_info'
+
 OAUTH_REDDIT = 'https://www.reddit.com/api/v1/authorize?state=123456&duration=permanent&scope={}&redirect_uri=http%3A%2F%2Flocalhost%3A5000%2Fredirect-reddit&client_id={}&response_type=code'.format(REDDIT_PERMISSIONS, REDDIT_CLIENT_ID)
 OAUTH_FB = 'https://www.facebook.com/v3.2/dialog/oauth?client_id={}&redirect_uri=http%3A%2F%2Flocalhost%3A5000%2Fredirect-facebook&state=6548211&scope={}&response_type=token'.format(FACEBOOK_APP_ID, FACEBOOK_PERMISSIONS)
-DB_AUTH = 'mysql+pymysql://root:password@reddit-mysql/reddit_recommender'
-VAR_STORE = '/tmp/usertemp.json'
 
+VAR_STORE = '/tmp/usertemp.json'
+SUBS_TXT = 'output_subreddits.txt'
+SUBS_SCREENNAME_TXT = 'output_subreddit_screen_name.txt'
 
 app = Flask(__name__)
-db = sqlalchemy.create_engine(DB_AUTH)
 
 
 @app.route('/')
@@ -125,17 +126,17 @@ def trigger_jobs(name=None):
 
     if twitter_name:
         job_param = 'twitter_user={}'.format(twitter_name)
-        if pdi.run_job('LoadTwitterData', job_param) is False:
+        if cmd.run_job('LoadTwitterData', job_param) is False:
             abort(500)
 
     if fb_token:
         job_param = 'access_token={}'.format(fb_token)
-        if pdi.run_job('facebookAPIexample', job_param) is False:
+        if cmd.run_job('facebookAPIexample', job_param) is False:
             abort(500)
 
     if reddit_token:
         rs.save_subs(reddit_token)
-        if pdi.run_trafo('reddit_subscriptions') is False:
+        if cmd.run_trafo('reddit_subscriptions') is False:
             abort(500)
     
     return redirect('/recommendations', code=302)
@@ -143,16 +144,17 @@ def trigger_jobs(name=None):
 
 @app.route('/recommendations')
 def recommendations(name=None):
-    # TODO: compute recs
-    return "recs here" 
-    return render_template('recommendations.html', name=name)
+    path_userwords = '/tmp/words_user.txt'
+    path_output = '/tmp/recommendations.txt'
+    gwl.start(_read_json('name'), path_userwords)  # creates words_user.txt
+    cmd.run_jar('red_rec', path_userwords, SUBS_TXT, SUBS_SCREENNAME_TXT, path_output)
 
+    with open(path_output) as f:
+        recs = json.load(f)
 
-@app.route('/db-test')
-def db_test():
-    with db.engine.connect() as con:
-        result = con.execute('SELECT COUNT(*) AS count FROM subreddits;')
-    return str(result.fetchone()['count'])
+    return json.dump(recs)
+
+    #return render_template('recommendations.html', name=name)
 
 
 def _get_params(request_args):
@@ -184,6 +186,7 @@ def _update_json(new_data):
 
 
 def _read_json(key):
+    # primitive key-value store - read
     with open(VAR_STORE, mode='r') as f:
         data = json.load(f)
         try:
