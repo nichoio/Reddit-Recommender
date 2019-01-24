@@ -4,8 +4,9 @@
 import facebook
 import json
 
+acc_token = sys.argv[1]
 #Graph instantiation
-graph = facebook.GraphAPI(access_token='', version='3.1')
+graph = facebook.GraphAPI(access_token=acc_token, version='3.1')
 
 ####################
 #	  API-Calls	   #
