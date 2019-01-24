@@ -25,13 +25,13 @@ def unique_list(l):
     return ulist
 
 #Getting the subreddit data from the database
-connection = MySQLdb.connect(host="localhost", user="root", passwd="123+#abc", db="reddit_recommender")
+connection = MySQLdb.connect(host="reddit-mysql", user="root", passwd="password", db="reddit_recommender")
 
 cursor = connection.cursor()
 
 #Get the subreddit data
 def get_subreddits(): 
-	cursor.execute("select title, display_name, advertiser_category, public_description, description from reddit_recommender.subreddits")
+	cursor.execute("select title, display_name, subscribers, advertiser_category, public_description, description from reddit_recommender.subreddits")
 	
 	subreddits = cursor.fetchall()
 	return subreddits 
@@ -55,7 +55,7 @@ def filterWords(text):
 def get_subreddit_names(subreddit_screen_names): 
 	file = open("output_subreddit_screen_name.txt", mode = "w")
 	for subreddit_screen_name in range(len(subreddit_screen_names)): 
-		file.write(subreddit_screen_names[subreddit_screen_name][1]+'\n')
+		file.write(subreddit_screen_names[subreddit_screen_name][1]+';'+str(subreddit_screen_names[subreddit_screen_name][2]) +'\n')
 		
 	file.close()
 	
