@@ -358,7 +358,7 @@
       <description />
       <type>SHELL</type>
       <filename />
-      <work_directory>${Internal.Job.Filename.Directory}../app/_facebook/</work_directory>
+      <work_directory>${Internal.Job.Filename.Directory}/../app/_facebook/</work_directory>
       <arg_from_previous>N</arg_from_previous>
       <exec_per_row>N</exec_per_row>
       <set_logfile>N</set_logfile>
