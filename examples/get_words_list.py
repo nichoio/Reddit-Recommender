@@ -32,7 +32,7 @@ cursor = connection.cursor()
 
 #Get the user our recommender should recommend subreddits to
 def get_user(name):
-	cursor.execute("select * from reddit_recommender.user where name = '" + name + "';")
+	cursor.execute("select facebook_u_id, twitter_screen_name, reddit_u_id  from reddit_recommender.user where name = '" + name + "';")
 
 	user = cursor.fetchall()
 	return user
@@ -183,7 +183,7 @@ def filterWords(text):
 	wordsForRec = unique_list(removeUnwanted)
 	return wordsForRec
 	
-def analyzeData(data): 
+def analyzeData(data, file_path): 
 	userWordsList = []
 	for word in data: 
 		userWordsList.append(filterWords(str(word)))
@@ -193,40 +193,20 @@ def analyzeData(data):
 	flattenWordsList = flattenWordsList #+ posts_place + likes_name + groups_name + events_name + events_place
 	countWords = Counter(flattenWordsList)
 	#needs to be written to a file 
-	#data = dict((x,y) for x, y in countWords.most_common())
+	data = dict((x,y) for x, y in countWords.most_common())
 	
-	#with open("output.txt", mode="w") as f: 
-	#	f.write(json.dumps(data))
+	with open( file_path+"output.txt", mode="w") as f: 
+		f.write(json.dumps(data))
 	
 	return countWords
 
-#Just a test and a blueprint for getting a file with lists of count words for specific subreddits
-#Can be deleted if the get_subreddit_words_list works
-def append_posts_to_file():
-	cursor.execute("select * from reddit_recommender.posts")
-	these_posts = cursor.fetchall()	
-	flatten_these_posts = []
-	file = open("output_posts.txt", mode="w")
-	for i in range(len(these_posts)):
-		userWordsList = []
-		for word in these_posts[i]: 
-			userWordsList.append(filterWords(str(word)))
-			
-		flattenWordsList = list(flatten(userWordsList))
-		#Additionally add data such as likes_name 'as they are'
-		flattenWordsList = flattenWordsList #+ posts_place + likes_name + groups_name + events_name + events_place
-		countWords = Counter(flattenWordsList)
-		#needs to be written to a file 
-		data = dict((x,y) for x, y in countWords.most_common())
-		
-		file.write(json.dumps(data)+'\n')
-		
-	file.close()
 
-append_posts_to_file()
-rec_user = get_user('Dominik Mollers')
-user_data = get_facebook_data(rec_user[0][1]) #+ get_twitter_data(rec_user[0][2]) + get_reddit_data(rec_user[0][3])
-print(analyzeData(user_data))
+def start(username, file_path):
+	rec_user = get_user(username)
+	#print(rec_user[0][0])
+	user_data = get_facebook_data(rec_user[0][0]) + get_twitter_data(rec_user[0][1]) + get_reddit_data(rec_user[0][2])
+	analyzeData(user_data, file_path)
 
+start('Dominik Mollers', 'C:/Users/Dominik/')
 
 cursor.close()
