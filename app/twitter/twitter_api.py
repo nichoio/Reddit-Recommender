@@ -23,10 +23,10 @@ if len(data) > 199:
     as_json.extend([json.loads(str(d)) for d in data2])
 
 # write to file as JSON
-with open('/temp/'+USER_SCREEN_NAME+'Tweets.json', 'w') as file:
+with open('/tmp/'+USER_SCREEN_NAME+'Tweets.json', 'w') as file:
     json.dump(as_json, file)
 
 user = api.GetUser(screen_name=USER_SCREEN_NAME)
 user_as_json = [json.loads(str(user))]
-with open('/temp/'+USER_SCREEN_NAME+'User.json', 'w') as file:
+with open('/tmp/'+USER_SCREEN_NAME+'User.json', 'w') as file:
     json.dump(user_as_json, file)
