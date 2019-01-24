@@ -317,7 +317,7 @@
       <description />
       <type>SHELL</type>
       <filename />
-      <work_directory>/app/twitter</work_directory>
+      <work_directory>${Internal.Entry.Current.Directory}/../app/twitter</work_directory>
       <arg_from_previous>N</arg_from_previous>
       <exec_per_row>N</exec_per_row>
       <set_logfile>N</set_logfile>
@@ -351,7 +351,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id />
-      <filename>Reddit-recommender/pentaho/TweetsToTable.ktr</filename>
+      <filename>${Internal.Entry.Current.Directory}/TweetsToTable.ktr</filename>
       <transname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -386,7 +386,7 @@
       <description />
       <type>SHELL</type>
       <filename />
-      <work_directory>/app/twitter</work_directory>
+      <work_directory>${Internal.Entry.Current.Directory}/../app/twitter</work_directory>
       <arg_from_previous>N</arg_from_previous>
       <exec_per_row>N</exec_per_row>
       <set_logfile>N</set_logfile>
@@ -410,7 +410,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id />
-      <filename>Reddit-recommender/pentaho/HashtagsToTable.ktr</filename>
+      <filename>${Internal.Entry.Current.Directory}/HashtagsToTable.ktr</filename>
       <transname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -445,7 +445,7 @@
       <description />
       <type>SHELL</type>
       <filename />
-      <work_directory>/app/twitter</work_directory>
+      <work_directory>${Internal.Entry.Current.Directory}/../app/twitter</work_directory>
       <arg_from_previous>N</arg_from_previous>
       <exec_per_row>N</exec_per_row>
       <set_logfile>N</set_logfile>
@@ -469,7 +469,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id />
-      <filename>Reddit-recommender/pentaho/FriendsToTable.ktr</filename>
+      <filename>${Internal.Entry.Current.Directory}/FriendsToTable.ktr</filename>
       <transname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -505,7 +505,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id />
-      <filename>Reddit-recommender/pentaho/UserToTable.ktr</filename>
+      <filename>${Internal.Entry.Current.Directory}/UserToTable.ktr</filename>
       <transname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
