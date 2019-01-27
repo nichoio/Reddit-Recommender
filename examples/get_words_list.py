@@ -163,7 +163,7 @@ def get_reddit_data(reddit_u_id, cursor):
 #Natural language processing for posts, tweets etc. 
 def filterWords(text):
 	data = text
-	stopWords = set(stopwords.words('german'))
+	stopWords = set(stopwords.words('english'))
 	unwantedWords = ['None','Impressum', 'impressum']
 	tokenizer = RegexpTokenizer(r'\w+')
 	words = tokenizer.tokenize(data)
