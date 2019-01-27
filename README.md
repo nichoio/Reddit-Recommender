@@ -1,16 +1,22 @@
 # Install
-Prerequisite: Docker & Docker Compose.
+Prerequisities: Docker & Docker Compose.
 
 ## Setup steps
-1. Download this repository
-2. go to the root of this repository
-3. run `./setup.sh`. This process might take 5-10 minutes depending on your internet connection. Wait until everything is done.
-4. Run `docker-compose up`
+ 1. Download this repository
+ 2. Go to the root of this repository
+ 3. Run `./setup.sh`. This process might take 5-10 minutes depending on your internet connection. Wait until everything is done.
+ 4. Run `docker-compose up`
 
 The recommender is now available under `http://localhost:5000`.
 
 Use `CTRL+C` to stop the application.
 
+## API-Keys
+Keys must be inserted in the following source files:
+ * app/app.py
+ * app/reddit_subscriptions.py
+ * app/twitter_api.py
+ * app/twitter_api_friends.py
 
 ## How to Connect to the VM?
 
@@ -38,7 +44,3 @@ Thats it, you're connected with the VM.
 1. nano /home/di-g3_adm/.ssh/authorized_keys
 2. add a new line to the file and copy the content of your public key into the file
 3. Save the file. Next time you will connect to the VM, you can use your private password.
-
-
-## Link for shared folder with DATA SOURCE SCHEMA
-https://www.lucidchart.com/invitations/accept/82069548-16a4-4286-b7d8-6d05c3e2dca2
