@@ -33,9 +33,6 @@ def get_user(name, cursor):
 		
 #Facebook
 def get_facebook_data(facebook_u_id, cursor):
-	if(facebook_u_id == None):
-		print("The user has no Facebook account")
-		
 	cursor.execute("select name, category, about, genre from reddit_recommender.facebook_likes where facebook_u_id = " + facebook_u_id + ";")
 
 	likes = cursor.fetchall()
@@ -99,9 +96,6 @@ def get_facebook_data(facebook_u_id, cursor):
 	
 #Twitter
 def get_twitter_data(twitter_screen_name, cursor):
-	if(twitter_screen_name == None):
-		print("The user has no Twitter account")
-		
 	cursor.execute("select text from reddit_recommender.twitter_tweets where screen_name = '" + twitter_screen_name + "';")
 	tweets = cursor.fetchall()
 	tweets_text = []
@@ -203,9 +197,22 @@ def start(username, file_path):
 	cursor = connection.cursor()
 	rec_user = get_user(username, cursor)
 	#print(rec_user[0][0])
-	user_data = get_facebook_data(rec_user[0][0], cursor) + get_twitter_data(rec_user[0][1], cursor) + get_reddit_data(rec_user[0][2], cursor)
+	try:
+		fb_user_data = get_facebook_data(rec_user[0][0], cursor)
+	except TypeError: 
+		fb_user_data = []
+		
+	try: 
+		twitter_user_data = get_twitter_data(rec_user[0][1], cursor)
+	except: 
+		twitter_user_data = []
+		
+	try: 
+		reddit_user_data = get_reddit_data(rec_user[0][2], cursor)
+	except: 
+		reddit_user_data = []
+		
+		
+	user_data = fb_user_data + twitter_user_data + reddit_user_data
 	analyzeData(user_data, file_path)
 	cursor.close()
-
-
-
