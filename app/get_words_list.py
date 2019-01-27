@@ -106,6 +106,7 @@ def get_twitter_data(twitter_screen_name, cursor):
 		
 	cursor.execute("select hashtag from reddit_recommender.twitter_hashtags where tweetId IN (select id from reddit_recommender.twitter_tweets where screen_name = '" + twitter_screen_name + "');")
 	hashtags = cursor.fetchall()
+	tweets_hashtag = []
 	for hashtag in range(len(hashtags)): 
 		tweets_hashtag.append(hashtags[hastag][0])
 		
