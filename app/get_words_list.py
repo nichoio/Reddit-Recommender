@@ -183,7 +183,7 @@ def analyzeData(data, file_path):
 	#needs to be written to a file 
 	data = dict((x,y) for x, y in countWords.most_common())
 	
-	with open( file_path+"output.txt", mode="w") as f: 
+	with open(file_path, mode="w") as f: 
 		f.write(json.dumps(data))
 	
 	return countWords
@@ -192,7 +192,7 @@ def analyzeData(data, file_path):
 def start(username, file_path):
 	#Getting the data from the DB
 	#Set up connection
-	connection = MySQLdb.connect(host = "localhost", user="root", passwd = "123+#abc", db = "reddit_recommender")
+	connection = MySQLdb.connect(host="reddit-mysql", user="root", passwd = "password", db = "reddit_recommender")
 
 	cursor = connection.cursor()
 	rec_user = get_user(username, cursor)
