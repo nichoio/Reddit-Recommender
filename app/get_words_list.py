@@ -26,7 +26,7 @@ def unique_list(l):
 
 #Get the user our recommender should recommend subreddits to
 def get_user(name, cursor):
-	cursor.execute("select facebook_u_id, twitter_screen_name, reddit_u_id  from reddit_recommender.user where name = '" + name + "';")
+	cursor.execute("select facebook_u_id, twitter_screen_name, reddit_name from reddit_recommender.user where name = '" + name + "';")
 
 	user = cursor.fetchall()
 	return user
