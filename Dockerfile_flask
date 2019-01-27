@@ -3,6 +3,7 @@ FROM reddit-recommender_reddit-pdi
 WORKDIR /app
 
 COPY ./app /app
+COPY ./java /java
 
 EXPOSE 5000
 RUN export FLASK_APP=/app/app.py
