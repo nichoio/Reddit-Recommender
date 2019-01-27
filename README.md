@@ -1,4 +1,18 @@
-# How to Connect to the VM?
+# Install
+Prerequisite: Docker & Docker Compose.
+
+## Setup steps
+1. Download this repository
+2. go to the root of this repository
+3. run `./setup.sh`. This process might take 5-10 minutes depending on your internet connection. Wait until everything is done.
+4. Run `docker-compose up`
+
+The recommender is now available under `http://localhost:5000`.
+
+Use `CTRL+C` to stop the application.
+
+
+## How to Connect to the VM?
 
 ## Tools 
 Download and install [Putty] (https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html)
