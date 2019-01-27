@@ -11,6 +11,10 @@ label {
   font-size: 24px;
 }
 
+h1 {
+  margin-bottom: 30px;
+}
+
 .btn, .btn-primary, .btn-primary:hover {
   background-color: rgb(252, 71, 30);
   background-image: unset;
@@ -27,4 +31,9 @@ label {
 
 .jumbotron p{
   font-size: 24px;
+}
+
+.table {
+  font-size: 18px;
+  margin-bottom: 50px;
 }

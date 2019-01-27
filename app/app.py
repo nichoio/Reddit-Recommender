@@ -18,8 +18,12 @@ OAUTH_REDDIT = 'https://www.reddit.com/api/v1/authorize?state=123456&duration=pe
 OAUTH_FB = 'https://www.facebook.com/v3.2/dialog/oauth?client_id={}&redirect_uri=http%3A%2F%2Flocalhost%3A5000%2Fredirect-facebook&state=6548211&scope={}&response_type=token'.format(FACEBOOK_APP_ID, FACEBOOK_PERMISSIONS)
 
 VAR_STORE = '/tmp/usertemp.json'
-SUBS_TXT = 'output_subreddits.txt'
-SUBS_SCREENNAME_TXT = 'output_subreddit_screen_name.txt'
+SUBS_TXT = '/app/output_subreddits.txt'
+SUBS_SCREENNAME_TXT = '/app/output_subreddit_screen_name.txt'
+
+REC_AMOUNT_SOCIAL = 10  # output of recommendations
+REC_AMOUNT_SUBS = 10  # output of recommendations based on subscriptions
+REC_ABO_MIN = 0  # amount of aubscriptoins sub must have to be considered
 
 app = Flask(__name__)
 
@@ -115,6 +119,7 @@ def load_user(name=None):
         TWITTER_SCREEN_NAME=user_data['name-twitter'] if 'name-twitter' in user_data else None,
         FACEBOOK_U_ID=user_data['id-facebook'] if 'id-facebook' in user_data else None,
         REDDIT_USER_NAME=user_data['name-reddit'] if 'name-reddit' in user_data else None)
+    #return redirect('/trigger-jobswindow.location.href = "you want to redirect";')
     return redirect('/trigger-jobs')
 
 
@@ -144,17 +149,28 @@ def trigger_jobs(name=None):
 
 @app.route('/recommendations')
 def recommendations(name=None):
-    path_userwords = '/tmp/words_user.txt'
+    path_userwords = '/tmp/words_user.json'
     path_output = '/tmp/recommendations.txt'
-    gwl.start(_read_json('name'), path_userwords)  # creates words_user.txt
-    cmd.run_jar('red_rec', path_userwords, SUBS_TXT, SUBS_SCREENNAME_TXT, path_output)
+    gwl.start(_read_json('name'), path_userwords)  # creates words_user.json
+    cmd.run_jar(
+        'red_rec',
+        path_userwords,
+        SUBS_TXT,
+        SUBS_SCREENNAME_TXT,
+        path_output,
+        str(REC_ABO_MIN),
+        'false',  # use weight
+        'false',  # false = std Jaccard
+        '0')  # edit distance <= arg
 
     with open(path_output) as f:
-        recs = json.load(f)
+        recs = json.load(f)[:REC_AMOUNT_SOCIAL]
 
-    return json.dump(recs)
-
-    #return render_template('recommendations.html', name=name)
+    return render_template(
+        'recommendations.html',
+        rows_social=recs,
+        rows_subs=recs,
+        cols=('subreddit', 'value'))
 
 
 def _get_params(request_args):
