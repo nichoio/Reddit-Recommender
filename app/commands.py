@@ -22,7 +22,7 @@ def run_job(name, _param=None):
 
 
 def run_jar(jar, *args):
-    command = 'java -jar {}.jar'.format(jar)
+    command = 'java -jar /java/{}.jar'.format(jar)
 
     for arg in args:
         command += ' {}'.format(arg)

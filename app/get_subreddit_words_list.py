@@ -38,7 +38,7 @@ def get_subreddits():
 	
 def filterWords(text):
 	data = text
-	stopWords = set(stopwords.words('german'))
+	stopWords = set(stopwords.words('english'))
 	unwantedWords = ['None','Impressum', 'impressum']
 	tokenizer = RegexpTokenizer(r'\w+')
 	words = tokenizer.tokenize(data)
