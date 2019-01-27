@@ -108,7 +108,7 @@ def get_twitter_data(twitter_screen_name, cursor):
 	hashtags = cursor.fetchall()
 	tweets_hashtag = []
 	for hashtag in range(len(hashtags)): 
-		tweets_hashtag.append(hashtags[hastag][0])
+		tweets_hashtag.append(hashtags[hashtag][0])
 		
 	twitter_hashtags = tweets_hashtag
 		
