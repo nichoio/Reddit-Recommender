@@ -24,21 +24,15 @@ def unique_list(l):
     [ulist.append(x) for x in l if x not in ulist]
     return ulist
 
-#Getting the data from the DB
-#Set up connection
-connection = MySQLdb.connect(host = "localhost", user="root", passwd = "123+#abc", db = "reddit_recommender")
-
-cursor = connection.cursor()
-
 #Get the user our recommender should recommend subreddits to
-def get_user(name):
+def get_user(name, cursor):
 	cursor.execute("select facebook_u_id, twitter_screen_name, reddit_u_id  from reddit_recommender.user where name = '" + name + "';")
 
 	user = cursor.fetchall()
 	return user
 		
 #Facebook
-def get_facebook_data(facebook_u_id):
+def get_facebook_data(facebook_u_id, cursor):
 	if(facebook_u_id == None):
 		print("The user has no Facebook account")
 		
@@ -104,7 +98,7 @@ def get_facebook_data(facebook_u_id):
 	return facebook_data
 	
 #Twitter
-def get_twitter_data(twitter_screen_name):
+def get_twitter_data(twitter_screen_name, cursor):
 	if(twitter_screen_name == None):
 		print("The user has no Twitter account")
 		
@@ -138,7 +132,7 @@ def get_twitter_data(twitter_screen_name):
 	return twitter_data
 	
 #Reddit 
-def get_reddit_data(reddit_u_id):
+def get_reddit_data(reddit_u_id, cursor):
 	cursor.execute("select title, display_name, advertiser_category, public_description from reddit_recommender.subreddits where display_name in (select display_name from reddit_recommender.reddit_personal where user_name = '" + reddit_u_id + "');")
 	subreddits = cursor.fetchall()
 	subreddits_title = []
@@ -202,11 +196,16 @@ def analyzeData(data, file_path):
 
 
 def start(username, file_path):
-	rec_user = get_user(username)
+	#Getting the data from the DB
+	#Set up connection
+	connection = MySQLdb.connect(host = "localhost", user="root", passwd = "123+#abc", db = "reddit_recommender")
+
+	cursor = connection.cursor()
+	rec_user = get_user(username, cursor)
 	#print(rec_user[0][0])
-	user_data = get_facebook_data(rec_user[0][0]) + get_twitter_data(rec_user[0][1]) + get_reddit_data(rec_user[0][2])
+	user_data = get_facebook_data(rec_user[0][0], cursor) + get_twitter_data(rec_user[0][1], cursor) + get_reddit_data(rec_user[0][2], cursor)
 	analyzeData(user_data, file_path)
+	cursor.close()
 
-start('Dominik Mollers', 'C:/Users/Dominik/')
 
-cursor.close()
+
