@@ -17,6 +17,7 @@ Keys must be inserted in the following source files:
  * app/reddit_subscriptions.py
  * app/twitter_api.py
  * app/twitter_api_friends.py
+ * app/loaduser.py
 
 ## How to Connect to the VM?
 
