@@ -106,8 +106,6 @@ CREATE TABLE reddit_recommender.twitter_tweets(
 	screen_name varchar(255) NOT NULL,
 	text varchar(300),
 	id bigint NOT NULL,
-	retweet_count int,
-	favorite_count int,
 	created_at varchar(255),
 	PRIMARY KEY (id),
     FOREIGN KEY (screen_name) REFERENCES reddit_recommender.user(twitter_screen_name) ON DELETE CASCADE

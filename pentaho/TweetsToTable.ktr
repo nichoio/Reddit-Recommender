@@ -555,32 +555,6 @@
         <repeat>N</repeat>
       </field>
       <field>
-        <name>retweet_count</name>
-        <path>$.*.retweet_count</path>
-        <type>Integer</type>
-        <format />
-        <currency />
-        <decimal />
-        <group />
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>favorite_count</name>
-        <path>$.*.favorite_count</path>
-        <type>Integer</type>
-        <format />
-        <currency />
-        <decimal />
-        <group />
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
         <name>created_at</name>
         <path>$.*.created_at</path>
         <type>String</type>
@@ -672,14 +646,6 @@
       <field>
         <column_name>id</column_name>
         <stream_name>id</stream_name>
-      </field>
-      <field>
-        <column_name>retweet_count</column_name>
-        <stream_name>retweet_count</stream_name>
-      </field>
-      <field>
-        <column_name>favorite_count</column_name>
-        <stream_name>favorite_count</stream_name>
       </field>
       <field>
         <column_name>created_at</column_name>
