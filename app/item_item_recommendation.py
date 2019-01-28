@@ -6,6 +6,7 @@ import itertools
 import MySQLdb
 import json
 import pickle
+import sys
 	
 def get_user_subreddits(user_name): 
     conn = MySQLdb.connect(host="reddit-mysql", user="root", passwd = "password", db = "reddit_recommender")
@@ -72,6 +73,7 @@ def search_recommendations(user_subs):
         json.dump(best_matches, outfile)
 
 #pass username here
+user_name = sys.argv[1]
 user_subreddits = get_user_subreddits(user_name)
 search_recommendations(user_subreddits)
 
