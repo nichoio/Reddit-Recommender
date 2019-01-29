@@ -164,9 +164,6 @@ def filterWords(text):
 	words = tokenizer.tokenize(data)
 	wordsFiltered = []
 
-	#for w in words: 
-	#	if w not in stopWords: 
-	#		wordsFiltered.append(w)
 	wordsFiltered = [word for word in words if word not in stopWords]
 	removeUnwanted = [word for word in wordsFiltered if word not in unwantedWords]	
 	wordsForRec = unique_list(removeUnwanted)
@@ -178,8 +175,7 @@ def analyzeData(data, file_path):
 		userWordsList.append(filterWords(str(word)))
 		
 	flattenWordsList = list(flatten(userWordsList))
-	#Additionally add data such as likes_name 'as they are'
-	flattenWordsList = flattenWordsList #+ posts_place + likes_name + groups_name + events_name + events_place
+
 	countWords = Counter(flattenWordsList)
 	#needs to be written to a file 
 	data = dict((x,y) for x, y in countWords.most_common())
@@ -197,7 +193,8 @@ def start(username, file_path):
 
 	cursor = connection.cursor()
 	rec_user = get_user(username, cursor)
-	#print(rec_user[0][0])
+	
+	#For our first recommendation we take only Facebook and Twitter into account
 	try:
 		fb_user_data = get_facebook_data(rec_user[0][0], cursor)
 	except TypeError: 
@@ -208,12 +205,7 @@ def start(username, file_path):
 	except: 
 		twitter_user_data = []
 		
-	try: 
-		reddit_user_data = get_reddit_data(rec_user[0][2], cursor)
-	except: 
-		reddit_user_data = []
 		
-		
-	user_data = fb_user_data + twitter_user_data + reddit_user_data
+	user_data = fb_user_data + twitter_user_data
 	analyzeData(user_data, file_path)
 	cursor.close()
