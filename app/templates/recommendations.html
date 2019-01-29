@@ -47,7 +47,11 @@
             {% for row in rows %}
               <tr>
                 {% for col in cols %}
-                  <td>{{ row[col] }}</td>
+                  {% if col == "subreddit" %}
+                    <td><a href="http://www.reddit.com/r/{{ row[col] }}">{{ row[col] }}</a></td>
+                  {% else %}
+                    <td>{{ row[col] }}</td>
+                  {% endif %}
                 {% endfor %}
               </tr>
             {% endfor %}
