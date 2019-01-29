@@ -183,10 +183,11 @@ def recommendations(name=None):
 @app.route('/recommendations-subs')
 def recommendations_subs(name=None):
     recs = iir.recommend(_read_json('name-reddit'))
+    recs_sorted = sorted(recs, key=lambda k: k['value'], reverse=True)
 
     return render_template(
         'recommendations.html',
-        rows=recs,
+        rows=recs_sorted,
         cols=('subreddit', 'value'),
         sub_recs=False,
         first_results=False)
