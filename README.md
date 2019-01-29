@@ -1,5 +1,6 @@
 # Install
-Prerequisities: Docker & Docker Compose.
+Prerequisities: Docker & Docker Compose.  
+Tested under docker-compose 1.21.0, lower versions might be incompatible.
 
 ## Setup steps
  1. Download this repository
