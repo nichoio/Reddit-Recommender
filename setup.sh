@@ -7,7 +7,7 @@ docker exec -it reddit-recommender-mysql /bin/bash -c \
 docker exec -it reddit-recommender-mysql /bin/bash -c \
 'mysql -u root -ppassword < /tmp/sqlkomplett.sql'
 docker exec -it reddit-recommender-mysql /bin/bash -c \
-'mysql -u root -ppassword reddit_recommender < /tmp/subredditsBigger5.sql'
+'mysql -u root -ppassword reddit_recommender < /tmp/subs_bigger5_sfw.sql'
 docker stop reddit-recommender-flask
 docker stop reddit-recommender-pdi
 docker stop reddit-recommender-mysql
