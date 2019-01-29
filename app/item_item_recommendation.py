@@ -11,7 +11,8 @@ import sys
 def get_user_subreddits(user_name): 
     conn = MySQLdb.connect(host="reddit-mysql", user="root", passwd = "password", db = "reddit_recommender")
     cursor = conn.cursor()
-    cursor.execute("SELECT title, title, display_name, advertiser_category, public_description from reddit_recommender.subreddits where display_name in (select display_name from reddit_recommender.reddit_personal where user_name = '" + reddit_u_id + "');")
+    cursor.execute(
+        "SELECT title, title, display_name, advertiser_category, public_description from reddit_recommender.subreddits where display_name in (select display_name from reddit_recommender.reddit_personal where user_name = '" + user_name + "');")
     subreddits = cursor.fetchall()
     cursor.close()
     return subreddits
@@ -69,11 +70,11 @@ def search_recommendations(user_subs):
             rec_dict.update({'subreddit': match_id})
             rec_dict.update({'value': best_match})
             best_matches.append(rec_dict)  
-    with open('item_item_rec.json', 'w') as outfile:
-        json.dump(best_matches, outfile)
+    return best_matches
+#    with open('item_item_rec.json', 'w') as outfile:
+#        json.dump(best_matches, outfile)
 
-#pass username here
-user_name = sys.argv[1]
-user_subreddits = get_user_subreddits(user_name)
-search_recommendations(user_subreddits)
+def recommend(user_name):
+    user_subreddits = get_user_subreddits(user_name)
+    return search_recommendations(user_subreddits)
 

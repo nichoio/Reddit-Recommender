@@ -20,58 +20,56 @@
         <img src="static/images/recommenderv1.png" style="width:800px;">
       </div>
 
-      <div class="jumbotron">
-        <div class="container">
-          <p>Your recommendations.</p>
-          <p>In the following you can see your subscriptions based on your social media account(s) and based on your reddit subscriptions, depending on what you've choosen initially.</p>
+      {% if first_results %}
+        <div class="jumbotron">
+          <div class="container">
+            <p>Your recommendations.</p>
+            <p>In the following you can see your subscriptions based on your social media account(s) and based on your reddit subscriptions, depending on what you've choosen initially.</p>
+          </div>
         </div>
-      </div>
+      {% endif %}
 
       <div class="container">
-        <h1>By your social media:</h1>
+        {% if first_results %}
+          <h1>By your social media:</h1>
+        {% else %}
+          <h1>By your subscriptions so far:</h1>
+        {% endif %}
         <table class="table">
           <thead>
             <tr>
               {% for col in cols %}
                 <th>{{ col }}</th>
-                  {% endfor %}
-                </tr>
-            </thead>
-            <tbody>
-              {% for row in rows_social %}
-                <tr>
-                  {% for col in cols %}
-                    <td>{{ row[col] }}</td>
-                  {% endfor %}
-                </tr>
               {% endfor %}
-            </tbody>
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in rows %}
+              <tr>
+                {% for col in cols %}
+                  <td>{{ row[col] }}</td>
+                {% endfor %}
+              </tr>
+            {% endfor %}
+          </tbody>
         </table>
       </div>
 
-      <div class="container">
-        <h1>By subreddits:</h1>
-        <table class="table">
-          <thead>
-            <tr>
-              {% for col in cols %}
-                <th>{{ col }}</th>
-                  {% endfor %}
-                </tr>
-            </thead>
-            <tbody>
-              {% for row in rows_subs %}
-                <tr>
-                  {% for col in cols %}
-                    <td>{{ row[col] }}</td>
-                  {% endfor %}
-                </tr>
-              {% endfor %}
-            </tbody>
-        </table>
-      </div> 
+      {% if sub_recs %}
+        <div class="container">
+          <button type="submit" id="continue-button" class="btn btn-primary" style="font-size:26px; margin-top:35px;">
+            Continue
+          </button>
+        </div> 
+      {% endif %}
       <script src="static/js/vendor/jquery-3.3.1.js"></script>
       <script>
+        $(function(){
+          $('#continue-button').click(function(e) {
+              window.open(
+                'http://localhost:5000/recommendations-subs');
+          });
+        });
       </script>
     </body>
 </html>

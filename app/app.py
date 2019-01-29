@@ -5,6 +5,7 @@ from flask import Flask, abort, jsonify, redirect, render_template, request
 
 from . import reddit_subscriptions as rs
 from . import commands as cmd
+from . import item_item_recommendation as iir
 from . import loaduser as lu
 from . import get_words_list as gwl
 from ._facebook import api as fbapi
@@ -127,7 +128,7 @@ def load_user(name=None):
 def trigger_jobs(name=None):
     twitter_name = _read_json('name-twitter')
     fb_token = _read_json('token-facebook')
-    reddit_token = _read_json('reddit_token')
+    reddit_token = _read_json('token-reddit')
 
     if twitter_name:
         job_param = 'twitter_user={}'.format(twitter_name)
@@ -144,6 +145,9 @@ def trigger_jobs(name=None):
         if cmd.run_trafo('reddit_subscriptions') is False:
             abort(500)
     
+    if twitter_name is None and fb_token is None:  # go to reddit recom.
+        return redirect('/recommendations-subs', code=302)
+         
     return redirect('/recommendations', code=302)
 
 
@@ -151,6 +155,8 @@ def trigger_jobs(name=None):
 def recommendations(name=None):
     path_userwords = '/tmp/words_user.json'
     path_output = '/tmp/recommendations.txt'
+    sub_recs = True if _read_json('name-reddit') else False
+
     gwl.start(_read_json('name'), path_userwords)  # creates words_user.json
     cmd.run_jar(
         'red_rec',
@@ -168,9 +174,22 @@ def recommendations(name=None):
 
     return render_template(
         'recommendations.html',
-        rows_social=recs,
-        rows_subs=recs,
-        cols=('subreddit', 'value'))
+        rows=recs,
+        cols=('subreddit', 'value'),
+        sub_recs=False,
+        first_results=True)
+
+
+@app.route('/recommendations-subs')
+def recommendations_subs(name=None):
+    recs = iir.recommend(_read_json('name-reddit'))
+
+    return render_template(
+        'recommendations.html',
+        rows=recs,
+        cols=('subreddit', 'value'),
+        sub_recs=False,
+        first_results=False)
 
 
 def _get_params(request_args):
