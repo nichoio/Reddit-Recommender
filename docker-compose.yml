@@ -6,6 +6,7 @@ services:
           dockerfile: Dockerfile_mysql
       command: mysqld --default-authentication-plugin=mysql_native_password
       container_name: reddit-recommender-mysql
+      image: reddit-recommender_reddit-mysql
       ports:
           - 3306:3306
       environment:
@@ -20,6 +21,7 @@ services:
       container_name: reddit-recommender-pdi
       depends_on:
           - reddit-mysql
+      image: reddit-recommender_reddit-pdi
   reddit-flask:
       build:
           context: .
@@ -28,5 +30,6 @@ services:
       container_name: reddit-recommender-flask
       depends_on:
           - reddit-mysql
+      image: reddit-recommender_reddit-flask
       ports:
           - 5000:5000
