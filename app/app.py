@@ -176,7 +176,7 @@ def recommendations(name=None):
         'recommendations.html',
         rows=recs,
         cols=('subreddit', 'value'),
-        sub_recs=False,
+        sub_recs=sub_recs,
         first_results=True)
 
 
