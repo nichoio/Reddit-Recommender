@@ -59,13 +59,13 @@ def search_recommendations(user_subs):
         for sub in user_subs:
             result = []
             best_match = 0.0
-            sub_id = sub[0]
+            sub_id = sub[2]
             match_id = 'id'
             for subreddit in itemlist:
                 score = compareSubreddits(sub, subreddit)
                 if(score > best_match and score < 1.0):
                     best_match = score
-                    match_id = subreddit[0]
+                    match_id = subreddit[2]
             rec_dict = dict(subreddit="Sub", value= 0.0)
             rec_dict.update({'subreddit': match_id})
             rec_dict.update({'value': best_match})
