@@ -165,7 +165,7 @@ def recommendations(name=None):
         SUBS_SCREENNAME_TXT,
         path_output,
         str(REC_ABO_MIN),
-        'true',  # use weight
+        'false',  # use weight
         'false',  # false = std Jaccard
         '0')  # edit distance <= arg
 
