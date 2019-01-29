@@ -22,9 +22,9 @@ VAR_STORE = '/tmp/usertemp.json'
 SUBS_TXT = '/app/output_subreddits.txt'
 SUBS_SCREENNAME_TXT = '/app/output_subreddit_screen_name.txt'
 
-REC_AMOUNT_SOCIAL = 10  # output of recommendations
-REC_AMOUNT_SUBS = 10  # output of recommendations based on subscriptions
-REC_ABO_MIN = 0  # amount of aubscriptoins sub must have to be considered
+REC_AMOUNT_SOCIAL = 99  # output of recommendations
+# REC_AMOUNT_SUBS = 10  # output of recommendations based on subscriptions
+REC_ABO_MIN = 0  # amount of subscriptoins sub must have to be considered (Twitter & FB)
 
 app = Flask(__name__)
 
@@ -165,7 +165,7 @@ def recommendations(name=None):
         SUBS_SCREENNAME_TXT,
         path_output,
         str(REC_ABO_MIN),
-        'false',  # use weight
+        'true',  # use weight
         'false',  # false = std Jaccard
         '0')  # edit distance <= arg
 
